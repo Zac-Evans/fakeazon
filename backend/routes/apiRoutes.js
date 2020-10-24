@@ -129,7 +129,7 @@ router.get("/order-history/:id", (req, res) => {
   db.order_history
     .findAll({
       where: {
-        id: req.params.id,
+        order_number: req.params.id,
       },
     })
     .then((order) => res.send(order))

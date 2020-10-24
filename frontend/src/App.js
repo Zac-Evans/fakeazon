@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import StripeCheckout from "react-stripe-checkout";
+import React from "react";
+import Detailedhistory from './components/Detailedhistory'
 
 function App() {
   // const [product, setProduct] = useState({
@@ -31,6 +31,7 @@ function App() {
 
   return (
     <div className="App">
+      <Detailedhistory order_number="2"/>
       {/* <StripeCheckout
         stripeKey="pk_test_51HeqVKGJa4J23nKD0reDb8sbU2UVlmX1bqJKIaM7pYiGz5jQNHRvrO9V86EyWagLTJMD4XQpLxyEzDUYQJB4SsVH00DJei5VIo"
         token={makePayment}
