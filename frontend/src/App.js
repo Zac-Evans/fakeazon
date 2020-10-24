@@ -1,47 +1,28 @@
-import React, { useState } from "react";
-import StripeCheckout from "react-stripe-checkout";
+import React, { Component } from "react";
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Register from './Components/Register';
+import Login from './Components/Login';
+import Home from './Components/Home';
 
-function App() {
-  // const [product, setProduct] = useState({
-  //   name: "Stuff",
-  //   price: 10,
-  //   productBy: "Me",
-  // });
+export default class App extends Component {
+    
+  render() {
+    return(
 
-  // const makePayment = (token) => {
-  //   const body = {
-  //     token,
-  //     product,
-  //   };
-  //   const headers = {
-  //     "Content-Type": "application/json",
-  //   };
-  //   return fetch(`http://localhost:8000/payment`, {
-  //     method: "POST",
-  //     headers,
-  //     body: JSON.stringify(body),
-  //   })
-  //     .then((response) => {
-  //       console.log("RESPONSE", response);
-  //       const { status } = response;
-  //       console.log("STATUS", status);
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
+      <Router>
 
-  return (
-    <div className="App">
-      {/* <StripeCheckout
-        stripeKey="pk_test_51HeqVKGJa4J23nKD0reDb8sbU2UVlmX1bqJKIaM7pYiGz5jQNHRvrO9V86EyWagLTJMD4XQpLxyEzDUYQJB4SsVH00DJei5VIo"
-        token={makePayment}
-        name="Stuff"
-      >
-        <button className="btn-large red">
-          Buy my {product.name} for only ${product.price}!
-        </button>
-      </StripeCheckout> */}
-    </div>
-  );
+        <Switch>
+          <Route exact path="/" component={ Home } />
+          <Route path="/register" component={ Register }/>
+          <Route path="/login" component={ Login }/>
+        </Switch>
+
+      </Router>
+
+    )
+  }
+
 }
-
-export default App;
