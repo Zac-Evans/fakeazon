@@ -1,5 +1,7 @@
+
 "use strict";
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class inventory extends Model {
     /**
@@ -11,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
+
   inventory.init(
     {
       product_name: {
@@ -42,4 +45,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   return inventory;
+
 };
+
