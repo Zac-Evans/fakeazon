@@ -18,7 +18,7 @@ function authenticationMiddleware(req, res, next) {
   }
 }
 
-////////////////////// Inventory
+
 //Show all inventory
 router.get("/inventory", (req, res) => {
   db.inventory.findAll().then((inventory) => res.send(inventory));
@@ -85,6 +85,7 @@ router.post("/inventory/add_product", (req, res) => {
 });
 
 
+
 ////////////////////// Order History
 
 //Create order history
@@ -115,10 +116,12 @@ router.get("/order-history", (req, res) => {
       where: {
         user_id: req.body.user_id,
       }
+
     })
     .then((orderHistory) => res.send(orderHistory))
     .catch((err) => console.log(err));
 });
+
 
 
 //Show order history for specific order
@@ -135,6 +138,8 @@ router.get("/order-history/:id", (req, res) => {
 
 
 ////////////////////// Users
+
+
 //Create a user
 
 router.post("/createuser", (req, res) => {
@@ -186,6 +191,7 @@ router.post("/createuser", (req, res) => {
   });
 });
 
+
 //Login to an account
 
 router.post('/login', (req, res) => {
@@ -220,6 +226,7 @@ router.post('/login', (req, res) => {
       res.status(404).send("Email/Password combination did not match")
     });
   });
+
 
 
 
