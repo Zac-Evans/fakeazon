@@ -14,16 +14,20 @@ const expressSession = require("express-session");
 const SessionStore = require("express-session-sequelize")(expressSession.Store);
 const cookieParser = require("cookie-parser");
 const Sequelize = require("sequelize");
-const myDatabase = new Sequelize("database", "email", "password", {
+
+app.use(cookieParser());
+
+const myDatabase = new Sequelize("database", "username", "password", {
   host: "localhost",
   dialect: "postgres",
 });
+
 const sequelizeSessionStore = new SessionStore({
   db: myDatabase,
 });
-const session = require("express-session");
+
 app.use(
-  session({
+  expressSession({
     secret: process.env.SECRET_KEY || "dev",
     store: sequelizeSessionStore,
     resave: false,
@@ -45,12 +49,13 @@ app.use("/", apiRoutes);
 //DB Connection
 require("./models/index");
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-db.sequelize.sync().then(() => {
-  app.listen(port, () => {
-    console.log(`Listening on port ${port}.`);
+db.sequelize
+  .sync()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Listening on port ${port}.`);
+    });
+  })
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
   });
-});

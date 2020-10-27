@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import Shop from "./components/Shop";
+import React from "react";
+import ProductList from "./components/ProductList";
 
 function App() {
   return (
     <div className="App">
-      <Shop />
+      <ProductList className="ProductList" />
     </div>
   );
 }
