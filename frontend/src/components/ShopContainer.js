@@ -29,6 +29,7 @@ class ShopContainer extends Component {
       <div>
         {this.state.products && (
           <Container>
+            <hr />
             <Router>
               <Switch>
                 <Route exact path="/shop">

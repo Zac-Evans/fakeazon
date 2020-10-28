@@ -33,7 +33,7 @@ class ProductCard extends Component {
     return (
       <Col lg="3" md="4" sm="5" xs="12">
         <Fade triggerOnce>
-          <Card className="productCard m-2">
+          <Card className="productCard m-2" style={{ border: "none" }}>
             <Link to={`/shop/${this.props.id}`}>
               <Card.Img
                 key={this.props.id}
@@ -55,6 +55,7 @@ class ProductCard extends Component {
 
               <AddToCartButton />
             </Card.Body>
+            <hr />
           </Card>
         </Fade>
       </Col>
