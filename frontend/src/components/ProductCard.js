@@ -4,39 +4,55 @@ import AddToCartButton from "./AddToCartButton";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Col from "react-bootstrap/Col";
 import { Fade } from "react-awesome-reveal";
-import Box from "@material-ui/core/Box";
-import Rating from "@material-ui/lab/Rating";
-import Typography from "@material-ui/core/Typography";
+import ProductRating from "./ProductRating";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  useParams,
+} from "react-router-dom";
 
 class ProductCard extends Component {
+  // componentDidMount() {
+  //   this.props.setCurrentProduct();
+
+  // }
   render() {
+    // const currentProduct = {
+    //   key: this.props.id,
+    //   id: this.props.id,
+    //   product_name: this.props.product_name,
+    //   description: this.props.description,
+    //   photo: this.props.photo,
+    //   price: this.props.price,
+    //   quantity: this.props.quantity,
+    //   rating: this.props.rating,
+    // };
+
     return (
       <Col lg="3" md="4" sm="5" xs="12">
         <Fade triggerOnce>
           <Card className="productCard m-2">
-            {/* <Card.Header as="h5"></Card.Header> */}
-            <Card.Img
-              // style={{ maxHeight: "300px" }}
-              key={this.props.id}
-              variant="top"
-              src={this.props.photo}
-              className="productImage"
-            />
-            <Card.Body className="text-center">
-              <Card.Title>{this.props.product_name}</Card.Title>
+            <Link to={`/shop/${this.props.id}`}>
+              <Card.Img
+                key={this.props.id}
+                variant="top"
+                src={this.props.photo}
+                className="productImage"
+              />
+            </Link>
 
-              <Card.Text>{this.props.description}</Card.Text>
+            <Card.Body className="text-center">
+              <Link to={`/shop/${this.props.id}`}>
+                <Card.Title>{this.props.product_name}</Card.Title>
+              </Link>
+
+              <Card.Text>{this.props.shortDescription}</Card.Text>
               <div>${this.props.price}</div>
-              <Box component="fieldset" mb={3} borderColor="transparent">
-                <Typography component="legend">Controlled</Typography>
-                <Rating
-                  name="simple-controlled"
-                  value="3"
-                  // onChange={(event, newValue) => {
-                  // setValue(newValue);
-                  // }}
-                />
-              </Box>
+
+              <ProductRating value={this.props.rating} />
+
               <AddToCartButton />
             </Card.Body>
           </Card>
