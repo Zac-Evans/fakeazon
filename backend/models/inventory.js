@@ -1,4 +1,3 @@
-
 "use strict";
 const { Model } = require("sequelize");
 
@@ -20,13 +19,21 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      description: {
+      rating: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      shortDescription: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      longDescription: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       photo: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       price: {
         type: DataTypes.DOUBLE,
@@ -45,6 +52,4 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   return inventory;
-
 };
-

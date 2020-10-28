@@ -11,7 +11,6 @@
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
-
     "connect-session-sequelize": "^7.0.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -20,6 +19,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "express-session-sequelize": "^2.3.0",
+    "faker": "^5.1.0",
     "nodemon": "^2.0.6",
     "pg": "^8.4.1",
     "pg-hstore": "^2.3.3",
@@ -28,6 +28,5 @@
     "session": "^0.1.0",
     "stripe": "^8.115.0",
     "uuid": "^8.3.1"
-
   }
 }
