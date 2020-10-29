@@ -73,7 +73,7 @@ class ShopContainer extends Component {
                 </Route>
 
                 {this.state.products.map((item, index) => (
-                  <Route exact path={`/shop/${item.id}`}>
+                  <Route key={item.id} exact path={`/shop/${item.id}`}>
                     <Product
                       key={item.id}
                       id={item.id}

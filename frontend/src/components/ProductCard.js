@@ -5,19 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Col from "react-bootstrap/Col";
 import { Fade } from "react-awesome-reveal";
 import ProductRating from "./ProductRating";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 class ProductCard extends Component {
-  // componentDidMount() {
-  //   this.props.setCurrentProduct();
-
-  // }
   render() {
     console.log(this.props.rating_count);
 
