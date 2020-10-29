@@ -1,5 +1,6 @@
 import React from "react";
 import ShopContainer from "./components/ShopContainer";
+import Header from "./components/Header";
 
 function App() {
   return (

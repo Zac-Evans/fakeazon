@@ -5,14 +5,25 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 import Product from "./Product";
+import Header from "./Header";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class ShopContainer extends Component {
   constructor(state) {
     super(state);
 
-    this.state = {};
+    this.state = {
+      inputValue: "",
+      products: [],
+    };
   }
+
+  filterOnChange = (event) => {
+    console.log("hi from onChange", event.target.value);
+    this.setState({
+      inputValue: event.target.value,
+    });
+  };
 
   componentDidMount() {
     return axios
@@ -25,14 +36,24 @@ class ShopContainer extends Component {
       });
   }
   render() {
+    const filteredProducts = this.state.products.filter((product) => {
+      return product.product_name
+        .toLowerCase()
+        .includes(this.state.inputValue.toLowerCase());
+    });
     return (
       <div>
+        <Header
+          inputValue={this.state.inputValue}
+          filterOnChange={this.filterOnChange}
+          product={this.filteredProducts}
+        />
         {this.state.products && (
           <Container>
-            <hr />
             <Router>
               <Switch>
                 <Route exact path="/shop">
+                  <hr />
                   <Row>
                     {this.state.products.map((item, index) => (
                       <ProductCard
@@ -45,6 +66,7 @@ class ShopContainer extends Component {
                         price={item.price}
                         quantity={item.quantity}
                         rating={item.rating}
+                        rating_count={item.rating_count}
                       />
                     ))}
                   </Row>
@@ -62,6 +84,7 @@ class ShopContainer extends Component {
                       price={item.price}
                       quantity={item.quantity}
                       rating={item.rating}
+                      rating_count={item.rating_count}
                     />
                   </Route>
                 ))}

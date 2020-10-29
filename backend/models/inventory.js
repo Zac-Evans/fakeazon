@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       rating: {
+        type: DataTypes.DOUBLE,
+        allowNull: true,
+      },
+      rating_count: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },

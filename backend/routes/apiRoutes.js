@@ -57,6 +57,8 @@ router.put("/inventory/:id", (req, res) => {
         photo: req.body.photo,
         price: req.body.price,
         quantity: req.body.quantity,
+        rating: req.body.rating,
+        rating_count: req.body.rating_count,
       },
       {
         where: {
