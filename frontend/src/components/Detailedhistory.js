@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-
+import OrderHistoryCard from "./OrderHistoryCard"
 class Detailedhistory extends React.Component {
 
     constructor(props) {
@@ -50,14 +50,22 @@ class Detailedhistory extends React.Component {
             <div>
                 {this.state.order && this.state.isLoaded && (
                     <Container>
-                        Items ordered for order #{this.props.order_number}
+                        Order details for order #{this.props.order_number}
                         <Row>
                             {this.state.order.map((item, index) => {
                                 return (
                                     <div key={item.id}>
+                                        <OrderHistoryCard 
+                                        id = {item.order_number}
+                                        product_name={item.product_name}
+                                        quantity = {item.quantity}
+                                        price = {item.price}
+                                        />
+                                        {/* <div>{item.product_name}</div>
+                                        <div>{item.quantity}</div>
+                                        <div>{item.price}</div> */}
                                         
-                                        {console.log(item.product_name)}
-                                    hi
+                                    
                                     </div>
                                 )
                             })}
