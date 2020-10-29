@@ -1,22 +1,8 @@
 {
   "development": {
-    "username": "zac-evans",
+    "username": "spencer",
     "password": null,
-    "database": "e-commerce_site",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
-  },
-  "test": {
-    "username": "zac-evans",
-    "password": null,
-    "database": "e-commerce_site",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
-  },
-  "production": {
-    "username": "zac-evans",
-    "password": null,
-    "database": "e-commerce_site",
+    "database": "e-commerce",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }

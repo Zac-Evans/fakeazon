@@ -28,7 +28,7 @@ router.get("/inventory/:id", (req, res) => {
   db.inventory
     .findAll({
       where: {
-        id: req.params.id,
+        product_name: req.params.id,
       },
     })
     .then((product) => res.send(product))
@@ -40,11 +40,13 @@ router.delete("/inventory/:id", (req, res) => {
   db.inventory
     .destroy({
       where: {
-        id: req.params.id,
+        product_name: req.params.id,
       },
     })
     .then(() => res.send("success"))
-    .catch((err) => console.log(err));
+
+    .catch(() => res.send('fail'))
+
 });
 
 //Edit product by id
@@ -56,18 +58,19 @@ router.put("/inventory/:id", (req, res) => {
         description: req.body.description,
         photo: req.body.photo,
         price: req.body.price,
+
         quantity: req.body.quantity,
         rating: req.body.rating,
         rating_count: req.body.rating_count,
       },
       {
         where: {
-          id: req.params.id,
+          product_name: req.params.id
         },
       }
     )
-    .then(() => res.send("success"))
-    .catch((err) => console.log(err));
+    .then((results) => { res.json(results) })
+    .catch((err) => res.send(err));
 });
 
 //Add new product to inventory
@@ -206,8 +209,10 @@ router.post("/login", (req, res) => {
 
       bcrypt.compare(password, storedPassword, function (err, result) {
         if (result) {
-          res.json(user);
-          //req.session.user = res;
+          res.json(results);
+          req.session.user = res;  
+
+
           userLoggedIn = true;
         } else {
           res.status(409).send("Incorrect password");
