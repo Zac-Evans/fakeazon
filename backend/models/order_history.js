@@ -1,5 +1,7 @@
+
 "use strict";
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class order_history extends Model {
     /**
@@ -10,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+
   }
+
   order_history.init(
     {
       user_id: {
@@ -59,4 +63,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   return order_history;
+
 };
+

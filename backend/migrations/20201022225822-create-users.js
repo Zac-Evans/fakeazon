@@ -1,9 +1,7 @@
-var faker = require("faker");
-
-("use strict");
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("users", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -24,6 +22,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    Promise.all([await queryInterface.dropTable("Users")]);
+    await queryInterface.dropTable("users");
   },
 };
