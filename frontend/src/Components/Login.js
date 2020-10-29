@@ -29,8 +29,10 @@ export default class Login extends Component {
       })
       .then((res) => {
         this.setState({ loggedIn: true });
+        sessionStorage.setItem('userName', res.data[0].first_name);
+        sessionStorage.setItem('isAdmin', res.data[0].admin);
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Incorrect Username or Password");
         return <Redirect push to="/login" />;
       });
