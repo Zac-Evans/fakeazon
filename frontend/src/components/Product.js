@@ -24,12 +24,13 @@ class Product extends React.Component {
             </Col>
             <Col>
               <h1>{this.props.product_name} </h1>
-              <ProductRating />
+              <ProductRating
+                rating={this.props.rating}
+                product_name={this.props.product_name}
+                rating_count={this.props.rating_count}
+              />
               <hr />
               <h2>${this.props.price}</h2>
-              <ul>
-                <li>In Stock: {this.props.quantity}</li>
-              </ul>
               <hr />
               <h5>About this item</h5>
               <hr />

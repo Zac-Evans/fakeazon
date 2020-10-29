@@ -19,16 +19,7 @@ class ProductCard extends Component {
 
   // }
   render() {
-    // const currentProduct = {
-    //   key: this.props.id,
-    //   id: this.props.id,
-    //   product_name: this.props.product_name,
-    //   description: this.props.description,
-    //   photo: this.props.photo,
-    //   price: this.props.price,
-    //   quantity: this.props.quantity,
-    //   rating: this.props.rating,
-    // };
+    console.log(this.props.rating_count);
 
     return (
       <Col lg="3" md="4" sm="5" xs="12">
@@ -51,7 +42,12 @@ class ProductCard extends Component {
               <Card.Text>{this.props.shortDescription}</Card.Text>
               <div>${this.props.price}</div>
 
-              <ProductRating value={this.props.rating} />
+              <ProductRating
+                id={this.props.id}
+                rating={this.props.rating}
+                product_name={this.props.product_name}
+                rating_count={this.props.rating_count}
+              />
 
               <AddToCartButton />
             </Card.Body>
