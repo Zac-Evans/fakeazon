@@ -1,48 +1,45 @@
+
 import React from "react";
 import Detailedhistory from './components/Detailedhistory'
 
-function App() {
-  // const [product, setProduct] = useState({
-  //   name: "Stuff",
-  //   price: 10,
-  //   productBy: "Me",
-  // });
+import React, { Component } from "react";
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Register from './Components/Register';
+import Login from './Components/Login';
+import Home from './Components/Home';
+import Admin from './Components/Admin_Components/Admin';
+import NewProduct from './Components/Admin_Components/NewProduct';
+import UpdateProduct from './Components/Admin_Components/UpdateProduct';
+import Delete from './Components/Admin_Components/Delete';
+import ShopContainer from "./components/ShopContainer";gi
 
-  // const makePayment = (token) => {
-  //   const body = {
-  //     token,
-  //     product,
-  //   };
-  //   const headers = {
-  //     "Content-Type": "application/json",
-  //   };
-  //   return fetch(`http://localhost:8000/payment`, {
-  //     method: "POST",
-  //     headers,
-  //     body: JSON.stringify(body),
-  //   })
-  //     .then((response) => {
-  //       console.log("RESPONSE", response);
-  //       const { status } = response;
-  //       console.log("STATUS", status);
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
+export default class App extends Component {
+    
+  render() {
+    return(
 
-  return (
-    <div className="App">
-      <Detailedhistory order_number="2"/>
-      {/* <StripeCheckout
-        stripeKey="pk_test_51HeqVKGJa4J23nKD0reDb8sbU2UVlmX1bqJKIaM7pYiGz5jQNHRvrO9V86EyWagLTJMD4XQpLxyEzDUYQJB4SsVH00DJei5VIo"
-        token={makePayment}
-        name="Stuff"
-      >
-        <button className="btn-large red">
-          Buy my {product.name} for only ${product.price}!
-        </button>
-      </StripeCheckout> */}
-    </div>
+      <Router>
+
+        <Switch>
+          <Route exact path="/" component={ Home } />
+           
+          <Route path="/register" component={ Register }/>
+          <Route path="/login" component={ Login }/>
+          <Route exact path="/admin" component={ Admin }/>
+          <Route path="/admin/create" component={ NewProduct }/>
+          <Route path="/admin/update" component={ UpdateProduct }/>
+          <Route path="/admin/delete" component={ Delete }/>
+          <Route path="/shop" component={ ShopContainer }/>
+         <Detailedhistory order_number="2"/>
+        </Switch>
+
+      </Router>
+      
+
   );
+} 
 }
-
-export default App;
+  
+ 

@@ -1,4 +1,6 @@
-"use strict";
+var faker = require("faker");
+
+("use strict");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("Users", {
