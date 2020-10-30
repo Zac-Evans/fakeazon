@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
+import Header from "../Header";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -67,70 +68,73 @@ export default class UpdateProduct extends Component {
       return <Redirect push to="/admin" />;
     } else {
       return (
-        <div className="mx-auto w-50 mt-4">
-          <h1
-            className="text-center mt-4"
-            style={{ textDecoration: "underline" }}
-          >
-            Update
-          </h1>
+        <div>
+          <Header />
+          <div className="mx-auto w-50 mt-4">
+          <Link style={{ textDecoration: 'underline' }} to="/admin">Back</Link>
+            <h1
+              className="text-center mt-4"
+              style={{ textDecoration: "underline" }}
+            >
+              Update
+            </h1>
 
-          <Form className="mb-4" onSubmit={this.handleSearchSubmit} inline>
-            <div className="mx-auto">
-              <p className="text-center">Enter item you would like to update</p>
-              <Form.Control
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-                id="itemEntered"
-                onChange={this.handleChange}
-              />
-              <Button type="submit" variant="outline-primary">
-                Search
-              </Button>
-            </div>
-          </Form>
-
-          <div id="formDiv" style={{ display: "none" }}>
-            <div className="text-center">
-              <ul style={{ listStyle: 'none' }}>
-                <li>{this.state.item.product_name}</li>
-                <li>{this.state.item.description}</li>
-              </ul>
-            </div>
-            <Form onSubmit={this.handleUpdateSubmit}>
-              <Form.Group>
-                <Form.Label>Update product name</Form.Label>
-                <Form.Control onChange={this.handleChange} id="name" />
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Label>Update product description</Form.Label>
-                <Form.Control onChange={this.handleChange} id="description" />
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Label>Update product URL or select file</Form.Label>
-                <Form.Control onChange={this.handleChange} id="photo" />
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Label>Update product price</Form.Label>
-                <Form.Control onChange={this.handleChange} id="price" />
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Label>Update product quantity</Form.Label>
-                <Form.Control onChange={this.handleChange} id="quantity" />
-              </Form.Group>
-
-              <Button className="mr-3" type="submit" variant="primary">
-                Submit
-              </Button>
-              <Link to="/admin">
-                <Button variant="primary">Go Back</Button>
-              </Link>
+            <Form className="mb-4" onSubmit={this.handleSearchSubmit} inline>
+              <div className="mx-auto">
+                <p className="text-center">
+                  Enter item you would like to update
+                </p>
+                <Form.Control
+                  type="text"
+                  placeholder="Search"
+                  className="mr-sm-2"
+                  id="itemEntered"
+                  onChange={this.handleChange}
+                />
+                <Button type="submit" variant="outline-primary">
+                  Search
+                </Button>
+              </div>
             </Form>
+
+            <div id="formDiv" style={{ display: "none" }}>
+              <div className="text-center">
+                <ul style={{ listStyle: "none" }}>
+                  <li>{this.state.item.product_name}</li>
+                  <li>{this.state.item.description}</li>
+                </ul>
+              </div>
+              <Form onSubmit={this.handleUpdateSubmit}>
+                <Form.Group>
+                  <Form.Label>Update product name</Form.Label>
+                  <Form.Control onChange={this.handleChange} id="name" />
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Label>Update product description</Form.Label>
+                  <Form.Control onChange={this.handleChange} id="description" />
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Label>Update product URL or select file</Form.Label>
+                  <Form.Control onChange={this.handleChange} id="photo" />
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Label>Update product price</Form.Label>
+                  <Form.Control onChange={this.handleChange} id="price" />
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Label>Update product quantity</Form.Label>
+                  <Form.Control onChange={this.handleChange} id="quantity" />
+                </Form.Group>
+
+                <Button className="mr-3" type="submit" variant="primary">
+                  Submit
+                </Button>
+              </Form>
+            </div>
           </div>
         </div>
       );

@@ -52,6 +52,7 @@ export default class Register extends Component {
       return (
         <div>
           <Form onSubmit={this.handleSubmit} className="mt-5 w-50 mx-auto">
+          <h1 className="text-center">Register</h1>
             <Form.Group>
               <Form.Label>First Name</Form.Label>
               <Form.Control
@@ -113,7 +114,7 @@ export default class Register extends Component {
               />
             </Form.Group>
 
-            <Link to="/login">
+            <Link className="mr-3" to="/login">
               <Button variant="primary">Login</Button>
             </Link>
 

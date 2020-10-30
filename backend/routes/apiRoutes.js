@@ -209,10 +209,8 @@ router.post("/login", (req, res) => {
 
       bcrypt.compare(password, storedPassword, function (err, result) {
         if (result) {
-          res.json(results);
-          req.session.user = res;  
-
-
+          res.json(user);
+          req.session.user = res; 
           userLoggedIn = true;
         } else {
           res.status(409).send("Incorrect password");
