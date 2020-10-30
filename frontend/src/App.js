@@ -1,4 +1,7 @@
 
+import React from "react";
+import Detailedhistory from './components/Detailedhistory'
+
 import React, { Component } from "react";
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
@@ -29,6 +32,7 @@ export default class App extends Component {
           <Route path="/admin/update" component={ UpdateProduct }/>
           <Route path="/admin/delete" component={ Delete }/>
           <Route path="/shop" component={ ShopContainer }/>
+         <Detailedhistory order_number="2"/>
         </Switch>
 
       </Router>
@@ -36,10 +40,6 @@ export default class App extends Component {
 
   );
 } 
+}
   
-  //From Zac's App.js. Think I merged it well with Spencer's, but have it here in case.
-     /* function App() {
-  return (
-    <div className="App">
-      <ShopContainer className="shopContainer" />
-    </div>
+ 
