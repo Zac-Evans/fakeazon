@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+
+import React from "react";
+import Detailedhistory from './components/Detailedhistory'
+
+>>>>>>> e78444176c9ab629b7ab610e6f22f7dc1e4ac716
 import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
@@ -15,7 +22,21 @@ export default class App extends Component {
     return (
       <Router>
         <Switch>
+<<<<<<< HEAD
           <Route exact path="/" component={ShopContainer} />
+=======
+          <Route exact path="/" component={ Home } />
+           
+          <Route path="/register" component={ Register }/>
+          <Route path="/login" component={ Login }/>
+          <Route exact path="/admin" component={ Admin }/>
+          <Route path="/admin/create" component={ NewProduct }/>
+          <Route path="/admin/update" component={ UpdateProduct }/>
+          <Route path="/admin/delete" component={ Delete }/>
+          <Route path="/shop" component={ ShopContainer }/>
+         <Detailedhistory order_number="2"/>
+        </Switch>
+>>>>>>> e78444176c9ab629b7ab610e6f22f7dc1e4ac716
 
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
@@ -25,6 +46,16 @@ export default class App extends Component {
           <Route path="/admin/delete" component={Delete} />
         </Switch>
       </Router>
+<<<<<<< HEAD
     );
   }
 }
+=======
+      
+
+  );
+} 
+}
+  
+ 
+>>>>>>> e78444176c9ab629b7ab610e6f22f7dc1e4ac716
