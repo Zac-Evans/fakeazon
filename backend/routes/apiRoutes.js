@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
+console.log(db.inventory)
+
 // For bcrypt
 const saltRounds = 10;
 const bcrypt = require("bcrypt");
@@ -115,6 +117,7 @@ router.get("/order-history", (req, res) => {
     .findAll({
       where: {
         user_id: req.body.user_id,
+        group: ['order_number']
       },
     })
     .then((orderHistory) => res.send(orderHistory))
@@ -122,14 +125,28 @@ router.get("/order-history", (req, res) => {
 });
 
 //Show order history for specific order
+db.inventory.hasMany(db.order_history, {
+  foreignKey: {
+    name: 'inventory_id'
+  }
+}),
+
+db.order_history.belongsTo(db.inventory, {
+  foreignKey: {
+    name: 'inventory_id'
+  }
+}),
+
+
 router.get("/order-history/:id", (req, res) => {
   db.order_history
-    .findAll({
-      where: {
-        order_number: req.params.id,
-      },
-    })
-    .then((order) => res.send(order))
+  .findAll({
+    where: {order_number: req.params.id},
+    include: [{
+      model: db.inventory,
+      // required: true
+     }]
+  }).then(order => res.send(order))
     .catch((err) => console.log(err));
 });
 

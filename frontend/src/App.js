@@ -1,5 +1,5 @@
-import React from "react";
-import Detailedhistory from './components/Detailedhistory'
+// import React from "react";
+import Detailedhistory from './Components/Detailedhistory'
 
 import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";

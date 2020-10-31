@@ -9,25 +9,24 @@ import { BrowserRouter as Link } from "react-router-dom";
 
 class ProductCard extends Component {
   render() {
-    console.log(this.props.rating_count);
 
     return (
       <Col lg="3" md="4" sm="5" xs="12">
         <Fade triggerOnce>
           <Card className="productCard m-2" style={{ border: "none" }}>
-            <Link to={`/shop/${this.props.id}`}>
+            <a href={`/shop/${this.props.id}`}>
               <Card.Img
                 key={this.props.id}
                 variant="top"
                 src={this.props.photo}
                 className="productImage"
               />
-            </Link>
+            </a>
 
             <Card.Body className="text-center">
-              <Link to={`/shop/${this.props.id}`}>
+              <a href={`/shop/${this.props.id}`}>
                 <Card.Title>{this.props.product_name}</Card.Title>
-              </Link>
+              </a>
 
               <Card.Text>{this.props.shortDescription}</Card.Text>
               <div>${this.props.price}</div>

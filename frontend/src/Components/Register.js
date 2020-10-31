@@ -36,8 +36,9 @@ export default class Register extends Component {
         gender: gender,
       }).then((res) => {
         this.setState({ loggedIn: true });
-        sessionStorage.setItem('userName', res.data[0].first_name);
-        sessionStorage.setItem('isAdmin', res.data[0].admin);
+        sessionStorage.setItem('userName', res.data.first_name);
+        sessionStorage.setItem('isAdmin', res.data.admin);
+        sessionStorage.setItem("userId", res.data.id);
       })
       .catch(() => {
         alert("Please enter valid inputs");

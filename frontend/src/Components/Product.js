@@ -13,7 +13,7 @@ class Product extends React.Component {
     return (
       <div>
         <Fade triggerOnce>
-          <a href="/shop">Back to results</a>
+          <a href="/">Back to results</a>
           <Row>
             <Col>
               <Image src={this.props.photo} fluid></Image>

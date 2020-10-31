@@ -49,6 +49,7 @@ app.use("/", apiRoutes);
 //DB Connection
 require("./models/index");
 
+// 
 db.sequelize
   .sync()
   .then(() => {
