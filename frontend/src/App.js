@@ -9,6 +9,7 @@ import NewProduct from "./Components/Admin_Components/NewProduct";
 import UpdateProduct from "./Components/Admin_Components/UpdateProduct";
 import Delete from "./Components/Admin_Components/Delete";
 import ShopContainer from "./Components/ShopContainer";
+import Checkout from "./Components/Checkout";
 
 export default class App extends Component {
   render() {
@@ -16,13 +17,15 @@ export default class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={ShopContainer} />
-
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
-          <Route exact path="/admin" component={Admin} />
-          <Route path="/admin/create" component={NewProduct} />
-          <Route path="/admin/update" component={UpdateProduct} />
-          <Route path="/admin/delete" component={Delete} />
+           
+          <Route path="/register" component={ Register }/>
+          <Route path="/login" component={ Login }/>
+          <Route exact path="/admin" component={ Admin }/>
+          <Route path="/admin/create" component={ NewProduct }/>
+          <Route path="/admin/update" component={ UpdateProduct }/>
+          <Route path="/admin/delete" component={ Delete }/>
+          <Route path="/shop" component={ ShopContainer }/>
+          <Route path="/checkout" component={ Checkout }/>
         </Switch>
       </Router>
     );

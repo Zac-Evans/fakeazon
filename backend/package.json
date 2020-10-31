@@ -15,7 +15,6 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "env": "0.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "express-session-sequelize": "^2.3.0",
@@ -25,8 +24,6 @@
     "pg-hstore": "^2.3.3",
     "psql": "0.0.1",
     "sequelize": "^6.3.5",
-    "session": "^0.1.0",
-    "stripe": "^8.115.0",
-    "uuid": "^8.3.1"
+    "session": "^0.1.0"
   }
 }

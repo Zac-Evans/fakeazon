@@ -45,8 +45,7 @@ router.delete("/inventory/:id", (req, res) => {
     })
     .then(() => res.send("success"))
 
-    .catch(() => res.send('fail'))
-
+    .catch(() => res.send("fail"));
 });
 
 //Edit product by id
@@ -65,11 +64,13 @@ router.put("/inventory/:id", (req, res) => {
       },
       {
         where: {
-          product_name: req.params.id
+          product_name: req.params.id,
         },
       }
     )
-    .then((results) => { res.json(results) })
+    .then((results) => {
+      res.json(results);
+    })
     .catch((err) => res.send(err));
 });
 
@@ -186,6 +187,31 @@ router.post("/createuser", (req, res) => {
   });
 });
 
+//Update user
+
+router.put("/user/:id", (req, res) => {
+  db.users
+    .update(
+      {
+        shipping_address_1: req.body.shippingAddress,
+        shipping_address_2: req.body.shippingAddress2,
+        shipping_city: req.body.city,
+        shipping_state: req.body.state,
+        shipping_zip: req.body.zip,
+        card_number: req.body.cardNumber,
+        card_expiration_date: req.body.exipration,
+        card_security_code: req.body.securityCode
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    )
+    .then((user) => res.json(user))
+    .catch((err) => alert(err));
+});
+
 //Login to an account
 
 router.post("/login", (req, res) => {
@@ -210,7 +236,7 @@ router.post("/login", (req, res) => {
       bcrypt.compare(password, storedPassword, function (err, result) {
         if (result) {
           res.json(user);
-          req.session.user = res; 
+          req.session.user = res;
           userLoggedIn = true;
         } else {
           res.status(409).send("Incorrect password");

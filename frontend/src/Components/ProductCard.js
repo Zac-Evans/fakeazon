@@ -9,7 +9,6 @@ import { BrowserRouter as Link } from "react-router-dom";
 
 class ProductCard extends Component {
   render() {
-    console.log(this.props.rating_count);
 
     return (
       <Col lg="3" md="4" sm="5" xs="12">
@@ -39,7 +38,7 @@ class ProductCard extends Component {
                 rating_count={this.props.rating_count}
               />
 
-              <AddToCartButton />
+              <AddToCartButton name={this.props.product_name}/>
             </Card.Body>
             <hr />
           </Card>

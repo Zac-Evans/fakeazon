@@ -22,34 +22,21 @@ export default class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
-    // axios
-    //   .post("http://localhost:8000/login", {
-    //     email: email,
-    //     password: password,
-    //   })
-    //   .then((res) => {
-    //     this.setState({ loggedIn: true });
-    //     sessionStorage.setItem('userName', res.data[0].first_name);
-    //     sessionStorage.setItem('isAdmin', res.data[0].admin);
-    //     console.log('success');
-    //   })
-    //   .catch(() => {
-    //     console.log('fail');
-    //     alert("Incorrect Username or Password");
-    //     return <Redirect push to="/login" />;
-    //   });
-    axios.post('http://localhost:8000/login', {
-      email: email,
-      password: password
-    }).then((res) => {
-      this.setState({ loggedIn: true });
-      sessionStorage.setItem('userName', res.data[0].first_name);
-      sessionStorage.setItem('isAdmin', res.data[0].admin);
-    })
-    .catch(() => {
-       console.log('fail');
-       alert("Incorrect Username or Password");
-       return <Redirect push to="/login" />;
+    axios
+      .post("http://localhost:8000/login", {
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        this.setState({ loggedIn: true });
+        sessionStorage.setItem("userName", res.data[0].first_name);
+        sessionStorage.setItem("isAdmin", res.data[0].admin);
+        sessionStorage.setItem("userId", res.data[0].id);
+      })
+      .catch(() => {
+        console.log("fail");
+        alert("Incorrect Username or Password");
+        return <Redirect push to="/login" />;
       });
   };
 

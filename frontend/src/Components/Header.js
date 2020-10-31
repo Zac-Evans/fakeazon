@@ -10,10 +10,16 @@ import Logo from "../images/logo-light.png";
 
 class Header extends Component {
 
-  componentDidMount = () => {
-    if(sessionStorage.getItem('userName')) {
-      document.getElementById('loginBtn').style.display = 'none';
+  constructor() {
+    super();
+    this.state = {
+      storage: false
     }
+  }
+
+  logOut = (e) => {
+    e.preventDefault();
+    sessionStorage.clear();
   }
 
   render() {
@@ -24,16 +30,17 @@ class Header extends Component {
             <Image className="logo" src={Logo} fluid width="120" height="120" />
           </Navbar.Brand>
           <Nav className="mr-auto">
-          <Nav.Link><Link to="/">Home</Link></Nav.Link>
-            <Nav.Link><Link to="/">Features</Link></Nav.Link>
-            <Nav.Link><Link to="/">Prices</Link></Nav.Link>
-            <Nav.Link><Link to="/admin">Admin</Link></Nav.Link>
-            <Link id="loginBtn" to="/register"><Button>Login/Register</Button></Link>
+            <Link style={linkStyle} to="/">Home</Link>
+            <Link style={linkStyle} to="/">Features</Link>
+            <Link style={linkStyle} to="/">Prices</Link>
+            <Link style={linkStyle} to="/admin">Admin</Link>
+            <Link to="/register"><Button>Login/Register</Button></Link>
+            <Button onClick={this.logOut}>Logout</Button>
           </Nav>
           <Form inline>
+            <Link style={{ marginRight: '30px', color: 'rgb(222, 237, 252)' }} to="/checkout">Checkout</Link>
             <FormControl
-              htmlFor="
-            search"
+              htmlFor="search"
               type="text"
               placeholder="Search"
               className="mr-sm-2"
@@ -46,6 +53,10 @@ class Header extends Component {
       </div>
     );
   }
+}
+
+const linkStyle = {
+  marginRight: '10px'
 }
 
 export default Header;
