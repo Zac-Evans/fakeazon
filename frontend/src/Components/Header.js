@@ -7,22 +7,18 @@ import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import Logo from "../images/logo-light.png";
+import LogOut from "./Admin_Components/LogOutBtn";
+import Login from "./Admin_Components/LoginBtn";
 
 class Header extends Component {
 
-  constructor() {
-    super();
-    this.state = {
-      storage: false
-    }
-  }
-
-  logOut = (e) => {
-    e.preventDefault();
-    sessionStorage.clear();
-  }
-
   render() {
+    let loggedIn = false;
+
+    if(sessionStorage.length > 0) {
+      loggedIn = true;
+    }
+
     return (
       <div>
         <Navbar className="pb-0 pt-0" bg="dark" variant="dark">
@@ -34,8 +30,8 @@ class Header extends Component {
             <Link style={linkStyle} to="/">Features</Link>
             <Link style={linkStyle} to="/">Prices</Link>
             <Link style={linkStyle} to="/admin">Admin</Link>
-            <Link to="/register"><Button>Login/Register</Button></Link>
-            <Button onClick={this.logOut}>Logout</Button>
+            {loggedIn && <LogOut />}
+            {!loggedIn && <Login />}
           </Nav>
           <Form inline>
             <Link style={{ marginRight: '30px', color: 'rgb(222, 237, 252)' }} to="/checkout">Checkout</Link>

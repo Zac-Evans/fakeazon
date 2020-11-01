@@ -8,9 +8,7 @@ class AddToCartButton extends Component {
     cartItems.push(this.props.name);
   }
 
-  array = () => {
-    sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }
+  array = () => { sessionStorage.setItem('cartItems', JSON.stringify(cartItems)) }
 
   render() {
     return (
