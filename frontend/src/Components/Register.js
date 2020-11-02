@@ -34,10 +34,30 @@ export default class Register extends Component {
         password: password,
         age: age,
         gender: gender,
-      }).then((res) => {
+      })
+      .then((res) => {
         this.setState({ loggedIn: true });
-        sessionStorage.setItem('userName', res.data[0].first_name);
-        sessionStorage.setItem('isAdmin', res.data[0].admin);
+        sessionStorage.setItem("userName", res.data.first_name);
+        sessionStorage.setItem("isAdmin", res.data.admin);
+        sessionStorage.setItem("userId", res.data.id);
+
+        //Convert sessionStorage cart to the database
+        let cart = JSON.parse(sessionStorage.getItem("cart"));
+        console.log(cart);
+        if (cart) {
+          axios
+            .get(`http://localhost:8000/get-cart/${res.data[0].id}`)
+            .then((results) => {
+              console.log(cart);
+              cart.map((item, index) =>
+                axios.post("http://localhost:8000/add-to-cart", {
+                  product_id: item,
+                  // quantity:
+                  shopping_cart_id: results.data[0].id,
+                })
+              );
+            });
+        }
       })
       .catch(() => {
         alert("Please enter valid inputs");
@@ -52,7 +72,7 @@ export default class Register extends Component {
       return (
         <div>
           <Form onSubmit={this.handleSubmit} className="mt-5 w-50 mx-auto">
-          <h1 className="text-center">Register</h1>
+            <h1 className="text-center">Register</h1>
             <Form.Group>
               <Form.Label>First Name</Form.Label>
               <Form.Control

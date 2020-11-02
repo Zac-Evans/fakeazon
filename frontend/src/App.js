@@ -1,7 +1,5 @@
-import React from "react";
-import Detailedhistory from './components/Detailedhistory'
-
 import React, { Component } from "react";
+import Detailedhistory from './Components/Detailedhistory'
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
