@@ -37,6 +37,7 @@ export default class Register extends Component {
       })
       .then((res) => {
         this.setState({ loggedIn: true });
+
         sessionStorage.setItem("userName", res.data.first_name);
         sessionStorage.setItem("isAdmin", res.data.admin);
         sessionStorage.setItem("userId", res.data.id);
@@ -58,10 +59,11 @@ export default class Register extends Component {
               );
             });
         }
+
       })
       .catch(() => {
         alert("Please enter valid inputs");
-        return <Redirect push to="/register" />;
+        return <Redirect push to="/login" />;
       });
   };
 

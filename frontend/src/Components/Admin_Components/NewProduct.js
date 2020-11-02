@@ -26,7 +26,6 @@ export default class NewProduct extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { name, description, photo, price, quantity } = this.state;
-    console.log(name, description, photo, price, quantity);
 
     axios
       .post("http://localhost:8000/inventory/add_product", {
@@ -36,8 +35,9 @@ export default class NewProduct extends Component {
         price: price,
         quantity: quantity,
       })
-      .then(() => {
+      .then((res) => {
         this.setState({ validProduct: true });
+        console.log(res);
       });
   };
 

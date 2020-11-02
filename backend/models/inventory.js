@@ -19,19 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      rating: {
-        type: DataTypes.DOUBLE,
-        allowNull: true,
-      },
-      rating_count: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      shortDescription: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      longDescription: {
+      description: {
         type: DataTypes.STRING,
         allowNull: false,
       },

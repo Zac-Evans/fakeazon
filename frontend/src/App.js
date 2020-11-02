@@ -10,6 +10,7 @@ import NewProduct from "./Components/Admin_Components/NewProduct";
 import UpdateProduct from "./Components/Admin_Components/UpdateProduct";
 import Delete from "./Components/Admin_Components/Delete";
 import ShopContainer from "./Components/ShopContainer";
+import Checkout from "./Components/Checkout";
 
 export default class App extends Component {
   render() {
@@ -25,7 +26,10 @@ export default class App extends Component {
           <Route path="/admin/update" component={ UpdateProduct }/>
           <Route path="/admin/delete" component={ Delete }/>
           <Route path="/shop" component={ ShopContainer }/>
-         <Detailedhistory order_number="2"/>
+          <Route path="/checkout" component={ Checkout }/>
+
+          <Detailedhistory order_number="2"/>
+
         </Switch>
       </Router>
     );

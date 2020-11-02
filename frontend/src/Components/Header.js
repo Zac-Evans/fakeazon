@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
@@ -7,16 +7,26 @@ import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import Logo from "../images/logo-light.png";
+import LogOut from "./Admin_Components/LogOutBtn";
+import Login from "./Admin_Components/LoginBtn";
+import AdminBtn from "./Admin_Components/AdminBtn";
+
 
 class Header extends Component {
 
-  componentDidMount = () => {
-    if(sessionStorage.getItem('userName')) {
-      document.getElementById('loginBtn').style.display = 'none';
-    }
-  }
-
   render() {
+    let loggedIn = false;
+    if (sessionStorage.length > 0) {
+      loggedIn = true;
+    }
+
+    let isAdmin = false;
+    let isAdminBool = sessionStorage.getItem('isAdmin');
+    console.log(isAdminBool);
+    if(isAdminBool === 'true') {
+        isAdmin = true;
+        console.log(true)
+    }
     return (
       <div>
         <Navbar className="pb-0 pt-0" bg="dark" variant="dark">
@@ -24,16 +34,28 @@ class Header extends Component {
             <Image className="logo" src={Logo} fluid width="120" height="120" />
           </Navbar.Brand>
           <Nav className="mr-auto">
-          <Nav.Link><Link to="/">Home</Link></Nav.Link>
-            <Nav.Link><Link to="/">Features</Link></Nav.Link>
-            <Nav.Link><Link to="/">Prices</Link></Nav.Link>
-            <Nav.Link><Link to="/admin">Admin</Link></Nav.Link>
-            <Link id="loginBtn" to="/register"><Button>Login/Register</Button></Link>
+            <Link style={linkStyle} to="/">
+              Home
+            </Link>
+            <Link style={linkStyle} to="/">
+              Features
+            </Link>
+            <Link style={linkStyle} to="/">
+              Prices
+            </Link>
+            {isAdmin && <AdminBtn style={{ marginRight: '20px' }} />}
+            {loggedIn && <LogOut />}
+            {!loggedIn && <Login />}
           </Nav>
           <Form inline>
+            <Link
+              style={{ marginRight: "30px", color: "rgb(222, 237, 252)" }}
+              to="/checkout"
+            >
+              Checkout
+            </Link>
             <FormControl
-              htmlFor="
-            search"
+              htmlFor="search"
               type="text"
               placeholder="Search"
               className="mr-sm-2"
@@ -47,5 +69,9 @@ class Header extends Component {
     );
   }
 }
+
+const linkStyle = {
+  marginRight: "10px",
+};
 
 export default Header;

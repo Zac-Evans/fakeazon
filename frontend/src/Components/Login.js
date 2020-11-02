@@ -51,6 +51,7 @@ export default class Login extends Component {
               );
             });
         }
+
       })
       .catch(() => {
         console.log("fail");

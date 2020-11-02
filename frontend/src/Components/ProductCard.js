@@ -38,6 +38,7 @@ class ProductCard extends Component {
                 rating_count={this.props.rating_count}
               />
 
+
               <AddToCartButton 
               key={this.props.id}
               id={this.props.id}
@@ -49,6 +50,7 @@ class ProductCard extends Component {
               quantity={this.props.quantity}
               rating={this.props.rating}
               rating_count={this.props.rating_count}/>
+
             </Card.Body>
             <hr />
           </Card>

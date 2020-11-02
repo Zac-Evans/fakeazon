@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 
 class AddToCartButton extends Component {
+
   constructor(props) {
     super(props);
 
@@ -49,6 +50,7 @@ class AddToCartButton extends Component {
     }
   };
 
+
   render() {
     let style = {};
     const fadeOut = {
@@ -65,6 +67,7 @@ class AddToCartButton extends Component {
     if (this.state.visible) style = fadeIn;
     return (
       <div>
+
         <Button
           variant="primary"
           className="addToCartButton m-1"
@@ -76,9 +79,12 @@ class AddToCartButton extends Component {
         <h6 key={this.props.id} className="pt-2 pb-0 mb-0" style={style}>
           Added to cart.
         </h6>
+
       </div>
     );
   }
 }
+
+const cartItems = [];
 
 export default AddToCartButton;
