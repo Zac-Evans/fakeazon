@@ -42,7 +42,7 @@ class Product extends React.Component {
               quantity={this.props.quantity}
               rating={this.props.rating}
               rating_count={this.props.rating_count}
-
+              rerenderParentCallback={this.props.rerenderParentCallback}
             />
           </Row>
         </Fade>

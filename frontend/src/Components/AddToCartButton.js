@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 
 class AddToCartButton extends Component {
-
   constructor(props) {
     super(props);
 
@@ -17,6 +16,15 @@ class AddToCartButton extends Component {
   };
 
   addToCart = (product) => {
+    let addedToCart = () => {
+      this.setState({ visible: true });
+      setTimeout(() => {
+        this.setState({
+          visible: false,
+        });
+      }, 3000);
+      this.props.rerenderParentCallback();
+    };
     //Check if logged in. If not, add to local storage cart
     if (!sessionStorage.getItem("userId")) {
       if (!sessionStorage.getItem("cart")) {
@@ -26,12 +34,7 @@ class AddToCartButton extends Component {
         let cart = JSON.parse(sessionStorage.getItem("cart"));
         cart.push(this.props.id);
         sessionStorage.setItem("cart", JSON.stringify(cart));
-        this.setState({ visible: true });
-        setTimeout(() => {
-          this.setState({
-            visible: false,
-          });
-        }, 3000);
+        addedToCart();
       }
     }
     //If logged in, store cart in database
@@ -47,9 +50,9 @@ class AddToCartButton extends Component {
             shopping_cart_id: res.data[0].id,
           });
         });
+      addedToCart();
     }
   };
-
 
   render() {
     let style = {};
@@ -60,14 +63,13 @@ class AddToCartButton extends Component {
 
     const fadeIn = {
       opacity: 1,
-      transition: "opacity 0.5s 0.5s",
+      transition: "opacity 0.3s 0.3s",
     };
 
     if (!this.state.visible) style = fadeOut;
     if (this.state.visible) style = fadeIn;
     return (
       <div>
-
         <Button
           variant="primary"
           className="addToCartButton m-1"
@@ -79,12 +81,9 @@ class AddToCartButton extends Component {
         <h6 key={this.props.id} className="pt-2 pb-0 mb-0" style={style}>
           Added to cart.
         </h6>
-
       </div>
     );
   }
 }
-
-const cartItems = [];
 
 export default AddToCartButton;
