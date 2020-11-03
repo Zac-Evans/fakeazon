@@ -15,17 +15,16 @@ import AdminBtn from "./Admin_Components/AdminBtn";
 class Header extends Component {
 
   render() {
+    //Test if user is logged in 
     let loggedIn = false;
     if (sessionStorage.length > 0) {
       loggedIn = true;
     }
 
+    //Test if user is an admin
     let isAdmin = false;
-    let isAdminBool = sessionStorage.getItem('isAdmin');
-    console.log(isAdminBool);
-    if(isAdminBool === 'true') {
+    if(sessionStorage.getItem('isAdmin') === 'true') {
         isAdmin = true;
-        console.log(true)
     }
     return (
       <div>
@@ -43,7 +42,7 @@ class Header extends Component {
             <Link style={linkStyle} to="/">
               Prices
             </Link>
-            {isAdmin && <AdminBtn style={{ marginRight: '20px' }} />}
+            {isAdmin && <AdminBtn />}
             {loggedIn && <LogOut />}
             {!loggedIn && <Login />}
           </Nav>
