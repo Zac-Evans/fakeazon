@@ -57,14 +57,13 @@ router.put("/inventory/:id", (req, res) => {
         description: req.body.description,
         photo: req.body.photo,
         price: req.body.price,
-
         quantity: req.body.quantity,
         rating: req.body.rating,
         rating_count: req.body.rating_count,
       },
       {
         where: {
-          product_name: req.params.id,
+          id: req.params.id,
         },
       }
     )
@@ -127,7 +126,7 @@ router.get("/order-history/:id", (req, res) => {
   db.order_history
     .findAll({
       where: {
-        id: req.params.id,
+        order_number: req.params.id,
       },
     })
     .then((order) => res.send(order))
@@ -174,11 +173,13 @@ router.post("/createuser", (req, res) => {
         age: age,
         gender: gender,
       })
-
       .then((results) => {
         res.json(results);
         userLoggedIn = true;
         req.session.user = results;
+        db.shopping_cart.create({
+          user_id: results.id,
+        });
       })
       .catch((e) => {
         console.log(e);
@@ -247,6 +248,40 @@ router.post("/login", (req, res) => {
       console.log(e);
       res.status(404).send("Email/Password combination did not match");
     });
+});
+
+//Create user cart
+router.post("/create-cart", (req, res) => {
+  db.shopping_cart
+    .create({
+      user_id: req.body.user_id,
+    })
+    .then((results) => res.send(results))
+    .catch((err) => console.log(err));
+});
+
+//Get cart
+router.get("/get-cart/:id", (req, res) => {
+  db.shopping_cart
+    .findAll({
+      where: {
+        user_id: req.params.id,
+      },
+    })
+    .then((results) => res.send(results))
+    .catch((err) => console.log(err));
+});
+
+//Add to cart
+router.post("/add-to-cart", (req, res) => {
+  db.cart_items
+    .create({
+      product_id: req.body.product_id,
+      // quantity: req.body.quantity,
+      shopping_cart_id: req.body.shopping_cart_id,
+    })
+    .then(() => res.send("Added to cart."))
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;
