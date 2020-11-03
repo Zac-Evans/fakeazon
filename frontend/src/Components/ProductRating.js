@@ -17,9 +17,6 @@ export default function SimpleRating(props) {
           (props.rating * props.rating_count + newValue) /
           (parseInt(props.rating_count) + 1),
       })
-      .then((res) => {
-        console.log(res.data);
-      })
       .catch((error) => {
         console.log("error");
       });

@@ -2,6 +2,7 @@ const { response } = require("express");
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
+const { Op } = require("sequelize");
 
 // For bcrypt
 const saltRounds = 10;
@@ -54,7 +55,8 @@ router.put("/inventory/:id", (req, res) => {
     .update(
       {
         product_name: req.body.product_name,
-        description: req.body.description,
+        shortDescription: req.body.shortDescription,
+        longDescription: req.body.longDescription,
         photo: req.body.photo,
         price: req.body.price,
         quantity: req.body.quantity,
@@ -78,7 +80,8 @@ router.post("/inventory/add_product", (req, res) => {
   db.inventory
     .create({
       product_name: req.body.product_name,
-      description: req.body.description,
+      shortDescription: req.body.shortDescription,
+      longDescription: req.body.longDescription,
       photo: req.body.photo,
       price: req.body.price,
       quantity: req.body.quantity,
@@ -201,7 +204,7 @@ router.put("/user/:id", (req, res) => {
         shipping_zip: req.body.zip,
         card_number: req.body.cardNumber,
         card_expiration_date: req.body.exipration,
-        card_security_code: req.body.securityCode
+        card_security_code: req.body.securityCode,
       },
       {
         where: {
@@ -270,6 +273,41 @@ router.get("/get-cart/:id", (req, res) => {
     })
     .then((results) => res.send(results))
     .catch((err) => console.log(err));
+});
+
+//Get cart and show item in cart
+router.get("/show-cart/:id", (req, res) => {
+  db.shopping_cart
+    .findAll({
+      raw: true,
+      where: {
+        user_id: req.params.id,
+      },
+    })
+    .then((cart) => {
+      db.cart_items
+        .findAll({
+          raw: true,
+          where: {
+            shopping_cart_id: cart[0].id,
+          },
+        })
+        .then((products) => {
+          let productArray = products.map((product) => product.product_id);
+          db.inventory
+            .findAll({
+              where: {
+                id: {
+                  [Op.or]: productArray,
+                },
+              },
+            })
+
+            .then((results) => res.send(results))
+
+            .catch((err) => console.log(err));
+        });
+    });
 });
 
 //Add to cart
