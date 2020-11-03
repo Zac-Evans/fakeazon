@@ -15,8 +15,18 @@ class ShopContainer extends Component {
     this.state = {
       inputValue: "",
       products: [],
+      cart_count: 0,
+      // update: 0,
     };
+    this.rerenderParentCallback = this.rerenderParentCallback.bind(this);
   }
+  rerenderParentCallback() {
+    this.forceUpdate();
+  }
+
+  // update = () => {
+  //   this.setState({ update: this.state.update + 1 });
+  // };
 
   filterOnChange = (event) => {
     console.log("hi from onChange", event.target.value);
@@ -26,6 +36,23 @@ class ShopContainer extends Component {
   };
 
   componentDidMount() {
+    if (!sessionStorage.getItem("userId")) {
+      if (sessionStorage.getItem("cart")) {
+        this.setState({
+          cart_count: JSON.parse(
+            sessionStorage.getItem("cart").split(",").length
+          ),
+        });
+      }
+    } else {
+      axios
+        .get(
+          `http://localhost:8000/count-cart/${sessionStorage.getItem("userId")}`
+        )
+        .then((res) => {
+          this.setState({ cart_count: res.data.length });
+        });
+    }
     return axios
       .get("http://localhost:8000/inventory/")
       .then((res) => {
@@ -43,7 +70,10 @@ class ShopContainer extends Component {
     // });
     return (
       <div>
-        <Header />
+        <Header
+          rerenderParentCallback={this.rerenderParentCallback}
+          cart_count={this.state.cart_count}
+        />
         {this.state.products && (
           <Container>
             <Router>
@@ -63,6 +93,7 @@ class ShopContainer extends Component {
                         quantity={item.quantity}
                         rating={item.rating}
                         rating_count={item.rating_count}
+                        rerenderParentCallback={this.rerenderParentCallback}
                       />
                     ))}
                   </Row>
@@ -81,6 +112,8 @@ class ShopContainer extends Component {
                       quantity={item.quantity}
                       rating={item.rating}
                       rating_count={item.rating_count}
+                      update={this.update}
+                      rerenderParentCallback={this.rerenderParentCallback}
                     />
                   </Route>
                 ))}

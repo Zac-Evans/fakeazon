@@ -275,6 +275,22 @@ router.get("/get-cart/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+//Get cart items not logged in
+router.post("/show-cart/logged-out", (req, res) => {
+  db.inventory
+    .findAll({
+      where: {
+        id: {
+          [Op.or]: req.body.products,
+        },
+      },
+    })
+
+    .then((results) => res.send(results))
+
+    .catch((err) => console.log(err));
+});
+
 //Get cart and show item in cart
 router.get("/show-cart/:id", (req, res) => {
   db.shopping_cart
@@ -308,6 +324,29 @@ router.get("/show-cart/:id", (req, res) => {
             .catch((err) => console.log(err));
         });
     });
+});
+
+//Get number of items in cart
+router.get("/count-cart/:id", (req, res) => {
+  db.shopping_cart
+    .findAll({
+      raw: true,
+      where: {
+        user_id: req.params.id,
+      },
+    })
+    .then((cart) => {
+      db.cart_items
+        .findAll({
+          raw: true,
+          where: {
+            shopping_cart_id: cart[0].id,
+          },
+        })
+
+        .then((results) => res.send(results));
+    })
+    .catch((err) => console.log(err));
 });
 
 //Add to cart

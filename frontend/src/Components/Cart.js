@@ -7,24 +7,40 @@ class Cart extends Component {
     super(state);
 
     this.state = {};
+    this.rerenderParentCallback = this.rerenderParentCallback.bind(this);
+  }
+  rerenderParentCallback() {
+    this.forceUpdate();
   }
 
   componentDidMount() {
-    return axios
-      .get(
-        `http://localhost:8000/show-cart/${sessionStorage.getItem("userId")}`
-      )
-      .then((result) => {
-        this.setState({ products: result.data });
-      })
-      .catch((error) => {
-        console.log("error");
-      });
+    console.log(JSON.parse(sessionStorage.getItem("cart")));
+    if (!sessionStorage.getItem("userId")) {
+      let productArray = JSON.parse(sessionStorage.getItem("cart"));
+      axios
+        .post("http://localhost:8000/show-cart/logged-out", {
+          products: productArray,
+        })
+        .then((result) => {
+          this.setState({ products: result.data });
+        })
+        .catch((error) => {
+          console.log("error");
+        });
+    } else {
+      axios
+        .get(
+          `http://localhost:8000/show-cart/${sessionStorage.getItem("userId")}`
+        )
+        .then((result) => {
+          this.setState({ products: result.data });
+        })
+        .catch((error) => {
+          console.log("error");
+        });
+    }
   }
   render() {
-    const style = {
-      width: "100px",
-    };
     return (
       <div>
         <h2 className="text-center">Your shopping cart:</h2>
@@ -41,6 +57,7 @@ class Cart extends Component {
               quantity={item.quantity}
               rating={item.rating}
               rating_count={item.rating_count}
+              rerenderParentCallback={this.rerenderParentCallback}
             />
           ))}
       </div>

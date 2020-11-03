@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import FormControl from "react-bootstrap/FormControl";
@@ -12,6 +14,7 @@ import LogOut from "./Admin_Components/LogOutBtn";
 import Login from "./Admin_Components/LoginBtn";
 import AdminBtn from "./Admin_Components/AdminBtn";
 import CartIcon from "../images/cart-icon.png";
+import CartCounter from "./CartCounter";
 
 class Header extends Component {
   render() {
@@ -64,13 +67,20 @@ class Header extends Component {
                 style={{ marginRight: "30px", color: "rgb(222, 237, 252)" }}
                 to="/checkout"
               >
-                <Image
-                  className="logo"
-                  src={CartIcon}
-                  fluid
-                  width="70"
-                  height="70"
-                />
+                <Row>
+                  <Col>
+                    <Image
+                      className="logo m-2"
+                      src={CartIcon}
+                      width="60"
+                      height="60"
+                      style={{ position: "absolute" }}
+                    />
+                  </Col>
+                  <Col>
+                    <CartCounter cart_count={this.props.cart_count} />
+                  </Col>
+                </Row>
               </Link>
             </Nav>
           </Navbar.Collapse>
@@ -79,9 +89,5 @@ class Header extends Component {
     );
   }
 }
-
-const linkStyle = {
-  marginRight: "10px",
-};
 
 export default Header;

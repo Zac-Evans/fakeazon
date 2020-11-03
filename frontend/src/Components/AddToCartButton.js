@@ -16,6 +16,15 @@ class AddToCartButton extends Component {
   };
 
   addToCart = (product) => {
+    let addedToCart = () => {
+      this.setState({ visible: true });
+      setTimeout(() => {
+        this.setState({
+          visible: false,
+        });
+      }, 3000);
+      this.props.rerenderParentCallback();
+    };
     //Check if logged in. If not, add to local storage cart
     if (!sessionStorage.getItem("userId")) {
       if (!sessionStorage.getItem("cart")) {
@@ -25,12 +34,7 @@ class AddToCartButton extends Component {
         let cart = JSON.parse(sessionStorage.getItem("cart"));
         cart.push(this.props.id);
         sessionStorage.setItem("cart", JSON.stringify(cart));
-        this.setState({ visible: true });
-        setTimeout(() => {
-          this.setState({
-            visible: false,
-          });
-        }, 3000);
+        addedToCart();
       }
     }
     //If logged in, store cart in database
@@ -46,6 +50,7 @@ class AddToCartButton extends Component {
             shopping_cart_id: res.data[0].id,
           });
         });
+      addedToCart();
     }
   };
 
@@ -58,7 +63,7 @@ class AddToCartButton extends Component {
 
     const fadeIn = {
       opacity: 1,
-      transition: "opacity 0.5s 0.5s",
+      transition: "opacity 0.3s 0.3s",
     };
 
     if (!this.state.visible) style = fadeOut;
