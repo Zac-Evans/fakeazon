@@ -195,7 +195,6 @@ router.put("/user/:id", (req, res) => {
     .update(
       {
         shipping_address_1: req.body.shippingAddress,
-        shipping_address_2: req.body.shippingAddress2,
         shipping_city: req.body.city,
         shipping_state: req.body.state,
         shipping_zip: req.body.zip,

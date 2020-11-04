@@ -12,7 +12,6 @@ export default class Checkout extends Component {
     super();
     this.state = {
       shippingAddress: "",
-      shippingAddress2: "",
       city: "",
       state: "",
       zip: "",
@@ -23,10 +22,10 @@ export default class Checkout extends Component {
   }
 
   handleSubmit = (e) => {
+    console.log(this.state);
     e.preventDefault();
     const {
       shippingAddress,
-      shippingAddress2,
       city,
       state,
       zip,
@@ -38,7 +37,6 @@ export default class Checkout extends Component {
     axios
       .put(`http://localhost:8000/user/${userId}`, {
         shippingAddress: shippingAddress,
-        shippingAddress2: shippingAddress2,
         city: city,
         state: state,
         zip: zip,
@@ -70,15 +68,6 @@ export default class Checkout extends Component {
             <Form.Label>Shipping Address</Form.Label>
             <Form.Control
               id="shippingAddress"
-              onChange={this.handleChange}
-              placeholder="123 circle lane"
-            />
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Label>Shipping Adress 2(optional)</Form.Label>
-            <Form.Control
-              id="shippingAddress2"
               onChange={this.handleChange}
               placeholder="123 circle lane"
             />
