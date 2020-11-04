@@ -12,7 +12,10 @@ class OrderHistoryCard extends Component {
         style={{ width: "18rem" }}
         className="mb-2"
       >
-        <Card.Header>Order #{this.props.id}</Card.Header>
+        <a href = {`/order-history/order=${this.props.id}`}>
+          <Card.Header>Order #{this.props.id}</Card.Header>
+
+        </a>
         <Card.Body>
           <Card.Title>{this.props.product_name} </Card.Title>
           <Card.Text>

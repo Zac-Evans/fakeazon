@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import Detailedhistory from './Components/Detailedhistory'
 import { BrowserRouter as Router } from "react-router-dom";
@@ -13,6 +11,7 @@ import UpdateProduct from "./Components/Admin_Components/UpdateProduct";
 import Delete from "./Components/Admin_Components/Delete";
 import ShopContainer from "./Components/ShopContainer";
 import Checkout from "./Components/Checkout";
+import CompleteOrderhistory from "./Components/CompleteOrderHistory"
 
 export default class App extends Component {
   render() {
@@ -28,11 +27,10 @@ export default class App extends Component {
           <Route path="/admin/update" component={ UpdateProduct }/>
           <Route path="/admin/delete" component={ Delete }/>
           <Route path="/shop" component={ ShopContainer }/>
-
           <Route path="/checkout" component={ Checkout }/>
-
-          <Detailedhistory order_number="2"/>
-
+          <Route path="/checkout" component={ Checkout }/>
+          <Route path="/order-history/user" component={ CompleteOrderhistory }/>
+          <Route path="/order-history/order=" component={ CompleteOrderhistory }/>
 
         </Switch>
       </Router>

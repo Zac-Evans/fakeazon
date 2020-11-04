@@ -17,7 +17,7 @@ class Detailedhistory extends React.Component {
 
         var that = this
 
-        axios.get(`http://localhost:8000/order-history/order=${this.props.order_number}`)
+        axios.get(`http://localhost:8000/order-history/order=${this.props.id}`)
             .then(res => {
                 let orderDetails = res.data
                 console.log(orderDetails)
@@ -32,11 +32,12 @@ class Detailedhistory extends React.Component {
 
 
     render() {
+        console.log('detailed history')
         return (
             <div>
                 {this.state.order && (
                     <Container>
-                        Order details for order #{this.props.order_number}
+                        Order details for order #{this.props.id}
                         <Row>
                             {this.state.order.map((item, index) => {
                                 return (

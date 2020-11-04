@@ -15,6 +15,7 @@ import Login from "./Admin_Components/LoginBtn";
 import AdminBtn from "./Admin_Components/AdminBtn";
 import CartIcon from "../images/cart-icon.png";
 import CartCounter from "./CartCounter";
+import History from "./Admin_Components/History"
 
 class Header extends Component {
 
@@ -63,6 +64,7 @@ class Header extends Component {
                 />
                 <Button variant="outline-info">Search</Button>
               </Form>
+              {loggedIn && <History />}
               {isAdmin && <AdminBtn />}
               {loggedIn && <LogOut />}
               {!loggedIn && <Login />}
@@ -81,7 +83,7 @@ class Header extends Component {
                     />
                   </Col>
                   <Col>
-                    <CartCounter cart_count={this.props.cart_count} />
+                    {/* <CartCounter cart_count={this.props.cart_count} /> */}
                   </Col>
                 </Row>
               </Link>
