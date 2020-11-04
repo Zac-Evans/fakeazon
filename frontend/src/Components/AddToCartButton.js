@@ -23,7 +23,7 @@ class AddToCartButton extends Component {
           visible: false,
         });
       }, 3000);
-      this.props.rerenderParentCallback();
+      // this.props.rerenderParentCallback();
     };
     //Check if logged in. If not, add to local storage cart
     if (!sessionStorage.getItem("userId")) {

@@ -19,11 +19,11 @@ class ShopContainer extends Component {
       cart_count: 0,
       // update: 0,
     };
-    this.rerenderParentCallback = this.rerenderParentCallback.bind(this);
+    // this.rerenderParentCallback = this.rerenderParentCallback.bind(this);
   }
-  rerenderParentCallback() {
-    this.forceUpdate();
-  }
+  // rerenderParentCallback() {
+  //   this.forceUpdate();
+  // }
 
   // update = () => {
   //   this.setState({ update: this.state.update + 1 });
@@ -72,7 +72,7 @@ class ShopContainer extends Component {
     return (
       <div>
         <Header
-          rerenderParentCallback={this.rerenderParentCallback}
+          // rerenderParentCallback={this.rerenderParentCallback}
           cart_count={this.state.cart_count}
         />
         {this.state.products && (
@@ -94,7 +94,7 @@ class ShopContainer extends Component {
                         quantity={item.quantity}
                         rating={item.rating}
                         rating_count={item.rating_count}
-                        rerenderParentCallback={this.rerenderParentCallback}
+                        // rerenderParentCallback={this.rerenderParentCallback}
                       />
                     ))}
                   </Row>
