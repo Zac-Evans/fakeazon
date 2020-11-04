@@ -7,14 +7,13 @@ class Cart extends Component {
     super(state);
 
     this.state = {};
-    this.rerenderParentCallback = this.rerenderParentCallback.bind(this);
+    // this.rerenderParentCallback = this.rerenderParentCallback.bind(this);
   }
-  rerenderParentCallback() {
-    this.forceUpdate();
-  }
+  // rerenderParentCallback() {
+  //   this.forceUpdate();
+  // }
 
   componentDidMount() {
-    console.log(JSON.parse(sessionStorage.getItem("cart")));
     if (!sessionStorage.getItem("userId")) {
       let productArray = JSON.parse(sessionStorage.getItem("cart"));
       axios
@@ -62,7 +61,7 @@ class Cart extends Component {
               quantity={item.quantity}
               rating={item.rating}
               rating_count={item.rating_count}
-              rerenderParentCallback={this.rerenderParentCallback}
+              // rerenderParentCallback={this.rerenderParentCallback}
             />
           ))}
       </div>

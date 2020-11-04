@@ -12,7 +12,7 @@ import axios from "axios";
 class CartItem extends Component {
   constructor(props) {
     super(props);
-    this.removeFromCart = this.removeFromCart.bind(this);
+    // this.removeFromCart = this.removeFromCart.bind(this);
     this.state = {
       value: 0,
     };
@@ -29,7 +29,7 @@ class CartItem extends Component {
       let filteredCart = cart.filter((item) => item !== this.props.id);
       sessionStorage.setItem("cart", JSON.stringify(filteredCart));
       addedToCart();
-      this.props.rerenderParentCallback();
+      // this.props.rerenderParentCallback();
     }
 
     //If logged in, store cart in database

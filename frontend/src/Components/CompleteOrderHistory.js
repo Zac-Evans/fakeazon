@@ -7,6 +7,7 @@ import OrderHistoryCard from "./OrderHistoryCard";
 import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Col from "react-bootstrap/Col";
+import Header from "./Header";
 import Detailedhistory from "./Detailedhistory";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -39,9 +40,10 @@ class CompleteOrderhistory extends Component {
 
     return (
       <div>
+        <Header />
         {this.state.order && (
           <Container>
-            Order history for user #{user_id}
+            <h2>Order history for user #{user_id}</h2>
             <Router>
               <Route exact path={`/order-history/user`}>
                 <Row>

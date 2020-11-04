@@ -15,12 +15,12 @@ import Login from "./Admin_Components/LoginBtn";
 import AdminBtn from "./Admin_Components/AdminBtn";
 import CartIcon from "../images/cart-icon.png";
 import CartCounter from "./CartCounter";
-import History from "./Admin_Components/History"
+import History from "./Admin_Components/History";
 
 class Header extends Component {
   render() {
     let loggedIn = false;
-    if (sessionStorage.length > 0) {
+    if (sessionStorage.getItem("userId")) {
       loggedIn = true;
     }
 
@@ -29,7 +29,6 @@ class Header extends Component {
     // console.log(isAdminBool);
     if (isAdminBool === "true") {
       isAdmin = true;
-      console.log(true);
     }
     return (
       <div>
@@ -40,51 +39,42 @@ class Header extends Component {
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="w-100 ">
-              {/* <Link style={linkStyle} to="/">
-                Home
-              </Link>
-              <Link style={linkStyle} to="/">
-                Features
-              </Link>
-              <Link style={linkStyle} to="/">
-                Prices
-              </Link> */}
+            <Nav className="">
+              <Row className="d-flex justify-content-center">
+                <Col className="col-md-9 col-12 d-flex justify-content-center">
+                  <Form inline className="w-100 ">
+                    <FormControl
+                      htmlFor="search"
+                      type="text"
+                      placeholder="Search"
+                      className="w-75"
+                      value={this.props.inputValue}
+                      onChange={this.props.filterOnChange}
+                    />
+                    <Button variant="outline-info">Search</Button>
+                  </Form>{" "}
+                </Col>
 
-              <Form inline className="w-100">
-                <FormControl
-                  htmlFor="search"
-                  type="text"
-                  placeholder="Search"
-                  className="w-75"
-                  value={this.props.inputValue}
-                  onChange={this.props.filterOnChange}
-                />
-                <Button variant="outline-info">Search</Button>
-              </Form>
-              {loggedIn && <History />}
-              {isAdmin && <AdminBtn />}
-              {loggedIn && <LogOut />}
-              {!loggedIn && <Login />}
-              <Link
-                style={{ marginRight: "30px", color: "rgb(222, 237, 252)" }}
-                to="/checkout"
-              >
-                <Row>
-                  <Col>
+                <Col className="d-flex justify-content-start col-md-3 col-12">
+                  {loggedIn && <History />}
+                  {isAdmin && <AdminBtn />}
+                  {loggedIn && <LogOut />}
+                  {!loggedIn && <Login />}
+                  <Link to="/checkout">
                     <Image
                       className="logo m-2"
                       src={CartIcon}
                       width="60"
                       height="60"
-                      style={{ position: "absolute" }}
                     />
-                  </Col>
+                  </Link>
+                </Col>
+              </Row>
+              {/* <Row>
                   <Col>
-                    {/* <CartCounter cart_count={this.props.cart_count} /> */}
+                    <CartCounter cart_count={this.props.cart_count} />
                   </Col>
-                </Row>
-              </Link>
+                </Row> */}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
