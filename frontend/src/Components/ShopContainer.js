@@ -114,7 +114,6 @@ class ShopContainer extends Component {
                       rating={item.rating}
                       rating_count={item.rating_count}
                       update={this.update}
-                      rerenderParentCallback={this.rerenderParentCallback}
                     />
                   </Route>
                 ))}
