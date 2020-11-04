@@ -2,6 +2,7 @@ const { response } = require("express");
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
+const { Op } = require("sequelize");
 
 console.log(db.inventory)
 
@@ -47,8 +48,7 @@ router.delete("/inventory/:id", (req, res) => {
     })
     .then(() => res.send("success"))
 
-    .catch(() => res.send('fail'))
-
+    .catch(() => res.send("fail"));
 });
 
 //Edit product by id
@@ -57,21 +57,23 @@ router.put("/inventory/:id", (req, res) => {
     .update(
       {
         product_name: req.body.product_name,
-        description: req.body.description,
+        shortDescription: req.body.shortDescription,
+        longDescription: req.body.longDescription,
         photo: req.body.photo,
         price: req.body.price,
-
         quantity: req.body.quantity,
         rating: req.body.rating,
         rating_count: req.body.rating_count,
       },
       {
         where: {
-          product_name: req.params.id
+          id: req.params.id,
         },
       }
     )
-    .then((results) => { res.json(results) })
+    .then((results) => {
+      res.json(results);
+    })
     .catch((err) => res.send(err));
 });
 
@@ -80,7 +82,8 @@ router.post("/inventory/add_product", (req, res) => {
   db.inventory
     .create({
       product_name: req.body.product_name,
-      description: req.body.description,
+      shortDescription: req.body.shortDescription,
+      longDescription: req.body.longDescription,
       photo: req.body.photo,
       price: req.body.price,
       quantity: req.body.quantity,
@@ -189,17 +192,44 @@ router.post("/createuser", (req, res) => {
         age: age,
         gender: gender,
       })
-
       .then((results) => {
         res.json(results);
         userLoggedIn = true;
         req.session.user = results;
+        db.shopping_cart.create({
+          user_id: results.id,
+        });
       })
       .catch((e) => {
         console.log(e);
         res.status(409).send("Username or email already taken.");
       });
   });
+});
+
+//Update user
+
+router.put("/user/:id", (req, res) => {
+  db.users
+    .update(
+      {
+        shipping_address_1: req.body.shippingAddress,
+        shipping_address_2: req.body.shippingAddress2,
+        shipping_city: req.body.city,
+        shipping_state: req.body.state,
+        shipping_zip: req.body.zip,
+        card_number: req.body.cardNumber,
+        card_expiration_date: req.body.exipration,
+        card_security_code: req.body.securityCode,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    )
+    .then((user) => res.json(user))
+    .catch((err) => alert(err));
 });
 
 //Login to an account
@@ -226,7 +256,7 @@ router.post("/login", (req, res) => {
       bcrypt.compare(password, storedPassword, function (err, result) {
         if (result) {
           res.json(user);
-          req.session.user = res; 
+          req.session.user = res;
           userLoggedIn = true;
         } else {
           res.status(409).send("Incorrect password");
@@ -237,6 +267,114 @@ router.post("/login", (req, res) => {
       console.log(e);
       res.status(404).send("Email/Password combination did not match");
     });
+});
+
+//Create user cart
+router.post("/create-cart", (req, res) => {
+  db.shopping_cart
+    .create({
+      user_id: req.body.user_id,
+    })
+    .then((results) => res.send(results))
+    .catch((err) => console.log(err));
+});
+
+//Get cart
+router.get("/get-cart/:id", (req, res) => {
+  db.shopping_cart
+    .findAll({
+      where: {
+        user_id: req.params.id,
+      },
+    })
+    .then((results) => res.send(results))
+    .catch((err) => console.log(err));
+});
+
+//Get cart items not logged in
+router.post("/show-cart/logged-out", (req, res) => {
+  db.inventory
+    .findAll({
+      where: {
+        id: {
+          [Op.or]: req.body.products,
+        },
+      },
+    })
+
+    .then((results) => res.send(results))
+
+    .catch((err) => console.log(err));
+});
+
+//Get cart and show item in cart
+router.get("/show-cart/:id", (req, res) => {
+  db.shopping_cart
+    .findAll({
+      raw: true,
+      where: {
+        user_id: req.params.id,
+      },
+    })
+    .then((cart) => {
+      db.cart_items
+        .findAll({
+          raw: true,
+          where: {
+            shopping_cart_id: cart[0].id,
+          },
+        })
+        .then((products) => {
+          let productArray = products.map((product) => product.product_id);
+          db.inventory
+            .findAll({
+              where: {
+                id: {
+                  [Op.or]: productArray,
+                },
+              },
+            })
+
+            .then((results) => res.send(results))
+
+            .catch((err) => console.log(err));
+        });
+    });
+});
+
+//Get number of items in cart
+router.get("/count-cart/:id", (req, res) => {
+  db.shopping_cart
+    .findAll({
+      raw: true,
+      where: {
+        user_id: req.params.id,
+      },
+    })
+    .then((cart) => {
+      db.cart_items
+        .findAll({
+          raw: true,
+          where: {
+            shopping_cart_id: cart[0].id,
+          },
+        })
+
+        .then((results) => res.send(results));
+    })
+    .catch((err) => console.log(err));
+});
+
+//Add to cart
+router.post("/add-to-cart", (req, res) => {
+  db.cart_items
+    .create({
+      product_id: req.body.product_id,
+      // quantity: req.body.quantity,
+      shopping_cart_id: req.body.shopping_cart_id,
+    })
+    .then(() => res.send("Added to cart."))
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

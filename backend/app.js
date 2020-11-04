@@ -17,10 +17,12 @@ const Sequelize = require("sequelize");
 
 app.use(cookieParser());
 
-const myDatabase = new Sequelize("database", "username", "password", {
+const myDatabase = new Sequelize("e-commerce", "zac-evans", null, {
   host: "localhost",
   dialect: "postgres",
 });
+
+// const myDatabase = new Sequelize("postgres://user:localhost/8000/e-commerce");
 
 const sequelizeSessionStore = new SessionStore({
   db: myDatabase,

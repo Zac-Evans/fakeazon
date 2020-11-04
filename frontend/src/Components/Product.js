@@ -9,7 +9,6 @@ import Image from "react-bootstrap/Image";
 
 class Product extends React.Component {
   render() {
-    console.log(this.props);
     return (
       <div>
         <Fade triggerOnce>
@@ -33,8 +32,17 @@ class Product extends React.Component {
               <p>{this.props.longDescription}</p>
             </Col>
             <OrderCard
+              key={this.props.id}
+              id={this.props.id}
+              product_name={this.props.product_name}
+              shortDescription={this.props.shortDescription}
+              longDescription={this.props.longDescription}
+              photo={this.props.photo}
               price={this.props.price}
               quantity={this.props.quantity}
+              rating={this.props.rating}
+              rating_count={this.props.rating_count}
+              rerenderParentCallback={this.props.rerenderParentCallback}
             />
           </Row>
         </Fade>

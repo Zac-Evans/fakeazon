@@ -25,7 +25,19 @@ class OrderCard extends Component {
           ) : (
             <h5>Out of stock.</h5>
           )}
-          <AddToCartButton />
+          <AddToCartButton
+            key={this.props.id}
+            id={this.props.id}
+            product_name={this.props.product_name}
+            shortDescription={this.props.shortDescription}
+            longDescription={this.props.longDescription}
+            photo={this.props.photo}
+            price={this.props.price}
+            quantity={this.props.quantity}
+            rating={this.props.rating}
+            rating_count={this.props.rating_count}
+            rerenderParentCallback={this.props.rerenderParentCallback}
+          />
         </Card>
       </Col>
     );

@@ -22,20 +22,41 @@ export default class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
-    axios.post('http://localhost:8000/login', {
-      email: email,
-      password: password
-    }).then((res) => {
-      this.setState({ loggedIn: true });
-      sessionStorage.setItem('userName', res.data[0].first_name);
-      sessionStorage.setItem('isAdmin', res.data[0].admin);
-      sessionStorage.setItem("userId", res.data[0].id);
 
-    })
-    .catch(() => {
-       console.log('fail');
-       alert("Incorrect Username or Password");
-       return <Redirect push to="/login" />;
+    axios
+      .post("http://localhost:8000/login", {
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        this.setState({ loggedIn: true });
+        sessionStorage.setItem("userName", res.data[0].first_name);
+        sessionStorage.setItem("isAdmin", res.data[0].admin);
+        sessionStorage.setItem("userId", res.data[0].id);
+
+        //Convert sessionStorage cart to the database
+        let cart = JSON.parse(sessionStorage.getItem("cart"));
+        console.log(cart);
+        if (cart) {
+          axios
+            .get(`http://localhost:8000/get-cart/${res.data[0].id}`)
+            .then((results) => {
+              console.log(cart);
+              cart.map((item, index) =>
+                axios.post("http://localhost:8000/add-to-cart", {
+                  product_id: item,
+                  // quantity:
+                  shopping_cart_id: results.data[0].id,
+                })
+              );
+            });
+        }
+
+      })
+      .catch(() => {
+        console.log("fail");
+        alert("Incorrect Username or Password");
+        return <Redirect push to="/login" />;
       });
   };
 
