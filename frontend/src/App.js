@@ -1,7 +1,5 @@
-
-
 import React, { Component } from "react";
-import Detailedhistory from './Components/Detailedhistory'
+import Detailedhistory from "./Components/Detailedhistory";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,20 +18,18 @@ export default class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={ShopContainer} />
-           
-          <Route path="/register" component={ Register }/>
-          <Route path="/login" component={ Login }/>
-          <Route exact path="/admin" component={ Admin }/>
-          <Route path="/admin/create" component={ NewProduct }/>
-          <Route path="/admin/update" component={ UpdateProduct }/>
-          <Route path="/admin/delete" component={ Delete }/>
-          <Route path="/shop" component={ ShopContainer }/>
 
-          <Route path="/checkout" component={ Checkout }/>
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route exact path="/admin" component={Admin} />
+          <Route path="/admin/create" component={NewProduct} />
+          <Route path="/admin/update" component={UpdateProduct} />
+          <Route path="/admin/delete" component={Delete} />
+          <Route path="/shop" component={ShopContainer} />
 
-          <Detailedhistory order_number="2"/>
+          <Route path="/checkout" component={Checkout} />
 
-
+          <Detailedhistory order_number="2" />
         </Switch>
       </Router>
     );

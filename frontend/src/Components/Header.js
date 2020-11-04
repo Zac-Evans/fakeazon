@@ -17,12 +17,10 @@ import CartIcon from "../images/cart-icon.png";
 import CartCounter from "./CartCounter";
 
 class Header extends Component {
-
   render() {
     let loggedIn = false;
     if (sessionStorage.length > 0) {
       loggedIn = true;
-
     }
 
     let isAdmin = false;
@@ -81,7 +79,7 @@ class Header extends Component {
                     />
                   </Col>
                   <Col>
-                    <CartCounter cart_count={this.props.cart_count} />
+                    {/* <CartCounter cart_count={this.props.cart_count} /> */}
                   </Col>
                 </Row>
               </Link>
