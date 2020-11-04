@@ -11,7 +11,7 @@ import Logo from "../images/logo-light.png";
 class Header extends Component {
 
   componentDidMount = () => {
-    if(sessionStorage.getItem('userName')) {
+    if (sessionStorage.getItem('userName')) {
       document.getElementById('loginBtn').style.display = 'none';
     }
   }
@@ -24,10 +24,10 @@ class Header extends Component {
             <Image className="logo" src={Logo} fluid width="120" height="120" />
           </Navbar.Brand>
           <Nav className="mr-auto">
-          <Nav.Link><Link to="/">Home</Link></Nav.Link>
-            <Nav.Link><Link to="/">Features</Link></Nav.Link>
-            <Nav.Link><Link to="/">Prices</Link></Nav.Link>
-            <Nav.Link><Link to="/admin">Admin</Link></Nav.Link>
+            <Link to="/">Home</Link>
+            <Link to="/">Features</Link>
+            <Link to="/">Prices</Link>
+            <Link to="/admin">Admin</Link>
             <Link id="loginBtn" to="/register"><Button>Login/Register</Button></Link>
           </Nav>
           <Form inline>

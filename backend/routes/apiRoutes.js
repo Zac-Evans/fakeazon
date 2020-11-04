@@ -112,19 +112,7 @@ router.post("/order-history", (req, res) => {
 });
 
 //Show order history for specific user
-router.get("/order-history", (req, res) => {
-  db.order_history
-    .findAll({
-      where: {
-        user_id: req.body.user_id,
-        group: ['order_number']
-      },
-    })
-    .then((orderHistory) => res.send(orderHistory))
-    .catch((err) => console.log(err));
-});
 
-//Show order history for specific order
 db.inventory.hasMany(db.order_history, {
   foreignKey: {
     name: 'inventory_id'
@@ -137,8 +125,19 @@ db.order_history.belongsTo(db.inventory, {
   }
 }),
 
+router.get("/order-history/user=:id", (req, res) => {
+  db.order_history
+  .findAll({
+    where: {user_id: req.params.id},
+    include: [{
+      model: db.inventory,
+      // required: true
+     }]
+  }).then(order => res.send(order))
+    .catch((err) => console.log(err));
+});
 
-router.get("/order-history/:id", (req, res) => {
+router.get("/order-history/order=:id", (req, res) => {
   db.order_history
   .findAll({
     where: {order_number: req.params.id},

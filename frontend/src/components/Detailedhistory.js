@@ -17,7 +17,7 @@ class Detailedhistory extends React.Component {
 
         var that = this
 
-        axios.get(`http://localhost:8000/order-history/${this.props.order_number}`)
+        axios.get(`http://localhost:8000/order-history/order=${this.props.order_number}`)
             .then(res => {
                 let orderDetails = res.data
                 console.log(orderDetails)

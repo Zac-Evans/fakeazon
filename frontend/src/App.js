@@ -1,5 +1,5 @@
 // import React from "react";
-import Detailedhistory from './Components/Detailedhistory'
+import CompleteOrderhistory from './Components/CompleteOrderHistory'
 
 import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -27,7 +27,7 @@ export default class App extends Component {
           <Route path="/admin/update" component={ UpdateProduct }/>
           <Route path="/admin/delete" component={ Delete }/>
           <Route path="/shop" component={ ShopContainer }/>
-         <Detailedhistory order_number="2"/>
+         <CompleteOrderhistory user_id="1"/>
         </Switch>
       </Router>
     );
