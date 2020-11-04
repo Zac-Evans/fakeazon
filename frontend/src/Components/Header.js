@@ -17,10 +17,12 @@ import CartIcon from "../images/cart-icon.png";
 import CartCounter from "./CartCounter";
 
 class Header extends Component {
+
   render() {
     let loggedIn = false;
     if (sessionStorage.length > 0) {
       loggedIn = true;
+
     }
 
     let isAdmin = false;
@@ -36,6 +38,7 @@ class Header extends Component {
           <Navbar.Brand href="/">
             <Image className="logo" src={Logo} fluid width="120" height="120" />
           </Navbar.Brand>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="w-100 ">
