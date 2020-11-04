@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-
     "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
@@ -26,5 +25,8 @@
     "psql": "0.0.1",
     "sequelize": "^6.3.5",
     "session": "^0.1.0"
+  },
+  "engines": {
+    "node": "v14.6.0"
   }
 }
