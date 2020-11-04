@@ -14,23 +14,19 @@ import LogOut from "./Admin_Components/LogOutBtn";
 import Login from "./Admin_Components/LoginBtn";
 import AdminBtn from "./Admin_Components/AdminBtn";
 import CartIcon from "../images/cart-icon.png";
-import CartCounter from "./CartCounter";
+// import CartCounter from "./CartCounter";
 
 class Header extends Component {
-
   render() {
     let loggedIn = false;
     if (sessionStorage.length > 0) {
       loggedIn = true;
-
     }
 
     let isAdmin = false;
     let isAdminBool = sessionStorage.getItem("isAdmin");
-    // console.log(isAdminBool);
     if (isAdminBool === "true") {
       isAdmin = true;
-      console.log(true);
     }
     return (
       <div>
@@ -73,7 +69,7 @@ class Header extends Component {
                 <Row>
                   <Col>
                     <Image
-                      className="logo m-2"
+                      className="logo"
                       src={CartIcon}
                       width="60"
                       height="60"
@@ -81,7 +77,7 @@ class Header extends Component {
                     />
                   </Col>
                   <Col>
-                    <CartCounter cart_count={this.props.cart_count} />
+                    {/* <CartCounter cart_count={this.props.cart_count} /> */}
                   </Col>
                 </Row>
               </Link>

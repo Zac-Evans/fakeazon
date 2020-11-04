@@ -14,7 +14,6 @@ class Cart extends Component {
   }
 
   componentDidMount() {
-    console.log(JSON.parse(sessionStorage.getItem("cart")));
     if (!sessionStorage.getItem("userId")) {
       let productArray = JSON.parse(sessionStorage.getItem("cart"));
       axios
