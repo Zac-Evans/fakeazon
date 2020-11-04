@@ -30,7 +30,9 @@ export default class UpdateProduct extends Component {
     e.preventDefault();
 
     axios
-      .get(`http://localhost:8000/inventory/${this.state.itemEntered}`)
+      .get(
+        `https://e-commerce-project-2020.herokuapp.com/inventory/${this.state.itemEntered}`
+      )
       .then((res) => {
         this.setState({ item: res.data[0] });
       })
@@ -47,13 +49,16 @@ export default class UpdateProduct extends Component {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:8000/inventory/${this.state.itemEntered}`, {
-        product_name: this.state.name,
-        description: this.state.description,
-        photo: this.state.photo,
-        price: this.state.price,
-        quantity: this.state.quantity,
-      })
+      .put(
+        `https://e-commerce-project-2020.herokuapp.com/inventory/${this.state.itemEntered}`,
+        {
+          product_name: this.state.name,
+          description: this.state.description,
+          photo: this.state.photo,
+          price: this.state.price,
+          quantity: this.state.quantity,
+        }
+      )
       .then((res) => {
         this.setState({ validUpdate: true });
         alert("Product updated");
@@ -71,7 +76,9 @@ export default class UpdateProduct extends Component {
         <div>
           <Header />
           <div className="mx-auto w-50 mt-4">
-          <Link style={{ textDecoration: 'underline' }} to="/admin">Back</Link>
+            <Link style={{ textDecoration: "underline" }} to="/admin">
+              Back
+            </Link>
             <h1
               className="text-center mt-4"
               style={{ textDecoration: "underline" }}

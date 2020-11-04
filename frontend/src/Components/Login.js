@@ -24,7 +24,7 @@ export default class Login extends Component {
     const { email, password } = this.state;
 
     axios
-      .post("http://localhost:8000/login", {
+      .post("https://e-commerce-project-2020.herokuapp.com/login", {
         email: email,
         password: password,
       })
@@ -39,19 +39,23 @@ export default class Login extends Component {
         console.log(cart);
         if (cart) {
           axios
-            .get(`http://localhost:8000/get-cart/${res.data[0].id}`)
+            .get(
+              `https://e-commerce-project-2020.herokuapp.com/get-cart/${res.data[0].id}`
+            )
             .then((results) => {
               console.log(cart);
               cart.map((item, index) =>
-                axios.post("http://localhost:8000/add-to-cart", {
-                  product_id: item,
-                  // quantity:
-                  shopping_cart_id: results.data[0].id,
-                })
+                axios.post(
+                  "https://e-commerce-project-2020.herokuapp.com/add-to-cart",
+                  {
+                    product_id: item,
+                    // quantity:
+                    shopping_cart_id: results.data[0].id,
+                  }
+                )
               );
             });
         }
-
       })
       .catch(() => {
         console.log("fail");

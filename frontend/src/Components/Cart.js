@@ -18,9 +18,12 @@ class Cart extends Component {
     if (!sessionStorage.getItem("userId")) {
       let productArray = JSON.parse(sessionStorage.getItem("cart"));
       axios
-        .post("http://localhost:8000/show-cart/logged-out", {
-          products: productArray,
-        })
+        .post(
+          "https://e-commerce-project-2020.herokuapp.com/show-cart/logged-out",
+          {
+            products: productArray,
+          }
+        )
         .then((result) => {
           this.setState({ products: result.data });
         })
@@ -30,7 +33,9 @@ class Cart extends Component {
     } else {
       axios
         .get(
-          `http://localhost:8000/show-cart/${sessionStorage.getItem("userId")}`
+          `https://e-commerce-project-2020.herokuapp.com/show-cart/${sessionStorage.getItem(
+            "userId"
+          )}`
         )
         .then((result) => {
           this.setState({ products: result.data });

@@ -39,7 +39,7 @@ export default class Checkout extends Component {
     } = this.state;
     let userId = sessionStorage.getItem("userId");
     axios
-      .put(`http://localhost:8000/user/${userId}`, {
+      .put(`https://e-commerce-project-2020.herokuapp.com/user/${userId}`, {
         shippingAddress: shippingAddress,
         shippingAddress2: shippingAddress2,
         city: city,

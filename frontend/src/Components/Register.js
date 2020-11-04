@@ -27,7 +27,7 @@ export default class Register extends Component {
     e.preventDefault();
     const { firstName, lastName, email, gender, password, age } = this.state;
     axios
-      .post("http://localhost:8000/createuser", {
+      .post("https://e-commerce-project-2020.herokuapp.com/createuser", {
         first_name: firstName,
         last_name: lastName,
         email: email,
@@ -38,7 +38,6 @@ export default class Register extends Component {
       .then((res) => {
         this.setState({ loggedIn: true });
 
-
         sessionStorage.setItem("userName", res.data.first_name);
         sessionStorage.setItem("isAdmin", res.data.admin);
         sessionStorage.setItem("userId", res.data.id);
@@ -48,19 +47,23 @@ export default class Register extends Component {
         console.log(cart);
         if (cart) {
           axios
-            .get(`http://localhost:8000/get-cart/${res.data[0].id}`)
+            .get(
+              `https://e-commerce-project-2020.herokuapp.com/get-cart/${res.data[0].id}`
+            )
             .then((results) => {
               console.log(cart);
               cart.map((item, index) =>
-                axios.post("http://localhost:8000/add-to-cart", {
-                  product_id: item,
-                  // quantity:
-                  shopping_cart_id: results.data[0].id,
-                })
+                axios.post(
+                  "https://e-commerce-project-2020.herokuapp.com/add-to-cart",
+                  {
+                    product_id: item,
+                    // quantity:
+                    shopping_cart_id: results.data[0].id,
+                  }
+                )
               );
             });
         }
-
       })
       .catch(() => {
         alert("Please enter valid inputs");

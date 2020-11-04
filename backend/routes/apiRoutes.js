@@ -4,7 +4,7 @@ const router = express.Router();
 const db = require("../models");
 const { Op } = require("sequelize");
 
-console.log(db.inventory)
+console.log(db.inventory);
 
 // For bcrypt
 const saltRounds = 10;
@@ -20,6 +20,11 @@ function authenticationMiddleware(req, res, next) {
     res.redirect("/login");
   }
 }
+
+//Backend running
+router.get("/", (req, res) => {
+  res.send("Backend running!");
+});
 
 //Show all inventory
 router.get("/inventory", (req, res) => {
@@ -118,37 +123,41 @@ router.post("/order-history", (req, res) => {
 
 db.inventory.hasMany(db.order_history, {
   foreignKey: {
-    name: 'inventory_id'
-  }
+    name: "inventory_id",
+  },
 }),
-
-db.order_history.belongsTo(db.inventory, {
-  foreignKey: {
-    name: 'inventory_id'
-  }
-}),
-
-router.get("/order-history/user=:id", (req, res) => {
-  db.order_history
-  .findAll({
-    where: {user_id: req.params.id},
-    include: [{
-      model: db.inventory,
-      // required: true
-     }]
-  }).then(order => res.send(order))
-    .catch((err) => console.log(err));
-});
+  db.order_history.belongsTo(db.inventory, {
+    foreignKey: {
+      name: "inventory_id",
+    },
+  }),
+  router.get("/order-history/user=:id", (req, res) => {
+    db.order_history
+      .findAll({
+        where: { user_id: req.params.id },
+        include: [
+          {
+            model: db.inventory,
+            // required: true
+          },
+        ],
+      })
+      .then((order) => res.send(order))
+      .catch((err) => console.log(err));
+  });
 
 router.get("/order-history/order=:id", (req, res) => {
   db.order_history
-  .findAll({
-    where: {order_number: req.params.id},
-    include: [{
-      model: db.inventory,
-      // required: true
-     }]
-  }).then(order => res.send(order))
+    .findAll({
+      where: { order_number: req.params.id },
+      include: [
+        {
+          model: db.inventory,
+          // required: true
+        },
+      ],
+    })
+    .then((order) => res.send(order))
     .catch((err) => console.log(err));
 });
 

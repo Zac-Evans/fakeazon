@@ -25,13 +25,15 @@ export default class Delete extends Component {
     e.preventDefault();
 
     axios
-      .get(`http://localhost:8000/inventory/${this.state.itemEntered}`)
+      .get(
+        `https://e-commerce-project-2020.herokuapp.com/inventory/${this.state.itemEntered}`
+      )
       .then((res) => {
         if (res.data[0] === "" || res.data[0] === undefined) {
           alert("No product");
         } else {
           axios.delete(
-            `http://localhost:8000/inventory/${this.state.itemEntered}`
+            `https://e-commerce-project-2020.herokuapp.com/inventory/${this.state.itemEntered}`
           );
         }
         alert("Item Deleted");
@@ -43,7 +45,9 @@ export default class Delete extends Component {
       <div>
         <Header />
         <div className="mx-auto w-50 mt-4">
-        <Link style={{ textDecoration: 'underline' }} to="/admin">Back</Link>
+          <Link style={{ textDecoration: "underline" }} to="/admin">
+            Back
+          </Link>
           <h1
             className="text-center mt-4"
             style={{ textDecoration: "underline" }}

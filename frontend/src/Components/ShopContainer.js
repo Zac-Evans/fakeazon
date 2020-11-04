@@ -48,14 +48,16 @@ class ShopContainer extends Component {
     } else {
       axios
         .get(
-          `http://localhost:8000/count-cart/${sessionStorage.getItem("userId")}`
+          `https://e-commerce-project-2020.herokuapp.com/count-cart/${sessionStorage.getItem(
+            "userId"
+          )}`
         )
         .then((res) => {
           this.setState({ cart_count: res.data.length });
         });
     }
     return axios
-      .get("http://localhost:8000/inventory/")
+      .get("https://e-commerce-project-2020.herokuapp.com/inventory/")
       .then((res) => {
         this.setState({ products: res.data });
       })
@@ -113,7 +115,7 @@ class ShopContainer extends Component {
                       quantity={item.quantity}
                       rating={item.rating}
                       rating_count={item.rating_count}
-                      update={this.update}
+                      // update={this.update}
                     />
                   </Route>
                 ))}

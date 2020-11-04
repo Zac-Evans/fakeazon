@@ -11,12 +11,15 @@ export default function SimpleRating(props) {
 
   function handleRating(newValue) {
     axios
-      .put(`http://localhost:8000/inventory/${props.id}`, {
-        rating_count: parseInt(props.rating_count) + 1,
-        rating:
-          (props.rating * props.rating_count + newValue) /
-          (parseInt(props.rating_count) + 1),
-      })
+      .put(
+        `https://e-commerce-project-2020.herokuapp.com/inventory/${props.id}`,
+        {
+          rating_count: parseInt(props.rating_count) + 1,
+          rating:
+            (props.rating * props.rating_count + newValue) /
+            (parseInt(props.rating_count) + 1),
+        }
+      )
       .catch((error) => {
         console.log("error");
       });

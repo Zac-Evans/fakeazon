@@ -41,14 +41,19 @@ class AddToCartButton extends Component {
     else {
       axios
         .get(
-          `http://localhost:8000/get-cart/${sessionStorage.getItem("userId")}`
+          `https://e-commerce-project-2020.herokuapp.com/get-cart/${sessionStorage.getItem(
+            "userId"
+          )}`
         )
         .then((res) => {
-          axios.post("http://localhost:8000/add-to-cart", {
-            product_id: this.props.id,
-            // quantity:
-            shopping_cart_id: res.data[0].id,
-          });
+          axios.post(
+            "https://e-commerce-project-2020.herokuapp.com/add-to-cart",
+            {
+              product_id: this.props.id,
+              // quantity:
+              shopping_cart_id: res.data[0].id,
+            }
+          );
         });
       addedToCart();
     }

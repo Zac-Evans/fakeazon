@@ -28,13 +28,16 @@ export default class NewProduct extends Component {
     const { name, description, photo, price, quantity } = this.state;
 
     axios
-      .post("http://localhost:8000/inventory/add_product", {
-        product_name: name,
-        description: description,
-        photo: photo,
-        price: price,
-        quantity: quantity,
-      })
+      .post(
+        "https://e-commerce-project-2020.herokuapp.com/inventory/add_product",
+        {
+          product_name: name,
+          description: description,
+          photo: photo,
+          price: price,
+          quantity: quantity,
+        }
+      )
       .then((res) => {
         this.setState({ validProduct: true });
         console.log(res);
@@ -49,7 +52,9 @@ export default class NewProduct extends Component {
         <div>
           <Header />
           <div className="mx-auto w-50 mt-4">
-          <Link style={{ textDecoration: 'underline' }} to="/admin">Back</Link>
+            <Link style={{ textDecoration: "underline" }} to="/admin">
+              Back
+            </Link>
             <h1 style={{ textDecoration: "underline" }} className="text-center">
               Create A New Product
             </h1>

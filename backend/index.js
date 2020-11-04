@@ -17,10 +17,25 @@ const Sequelize = require("sequelize");
 
 app.use(cookieParser());
 
-const myDatabase = new Sequelize("e-commerce", "zac-evans", null, {
-  host: "localhost",
-  dialect: "postgres",
-});
+const myDatabase = new Sequelize(
+  "d7kqothtsc8th1",
+  "acjpymhkgnvtkd",
+  "1eae16c6bfe542413afcfaf75c03a7d5bb8fb79649e8c637ab52f648d737d834",
+  {
+    host: "ec2-54-196-89-124.compute-1.amazonaws.com",
+    dialect: "postgres",
+    sslmode: "require",
+    port: 5432,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+      keepAlive: true,
+    },
+    ssl: true,
+  }
+);
 
 // const myDatabase = new Sequelize("postgres://user:localhost/8000/e-commerce");
 
@@ -51,7 +66,7 @@ app.use("/", apiRoutes);
 //DB Connection
 require("./models/index");
 
-// 
+//
 db.sequelize
   .sync()
   .then(() => {
