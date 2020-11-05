@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class LogOut extends Component {
@@ -11,9 +12,9 @@ export default class LogOut extends Component {
 
   render() {
     return (
-      <Button className="m-3" onClick={this.logOut}>
-        Logout
-      </Button>
+      <Link className="m-2" to="/">
+        <Button onClick={this.logOut}>Logout</Button>
+      </Link>
     );
   }
 }

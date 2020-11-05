@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import Header from "./Header";
 
 export default class Login extends Component {
   constructor() {
@@ -70,6 +71,7 @@ export default class Login extends Component {
     } else {
       return (
         <div>
+          <Header />
           <Form onSubmit={this.handleSubmit} className="mt-5 w-50 mx-auto">
             <h1 className="text-center">Login</h1>
             <Form.Group>
@@ -91,14 +93,17 @@ export default class Login extends Component {
                 placeholder="Password"
               />
             </Form.Group>
+            <div className="d-flex justify-content-center">
+              <Link className="mr-3" to="/register">
+                <Button variant="danger" className="btn-lg">
+                  Register
+                </Button>
+              </Link>
 
-            <Link className="mr-3" to="/register">
-              <Button variant="primary">Register</Button>
-            </Link>
-
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+              <Button variant="primary" className="btn-lg" type="submit">
+                Submit
+              </Button>
+            </div>
           </Form>
         </div>
       );

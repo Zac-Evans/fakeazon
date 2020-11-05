@@ -10,7 +10,8 @@ export default class NewProduct extends Component {
     super();
     this.state = {
       name: "",
-      description: "",
+      shortDescription: "",
+      longDescription: "",
       photo: "",
       price: "",
       quantity: "",
@@ -25,14 +26,22 @@ export default class NewProduct extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { name, description, photo, price, quantity } = this.state;
+    const {
+      name,
+      shortDescription,
+      longDescription,
+      photo,
+      price,
+      quantity,
+    } = this.state;
 
     axios
       .post(
         "https://e-commerce-project-2020.herokuapp.com/inventory/add_product",
         {
           product_name: name,
-          description: description,
+          shortDescription: shortDescription,
+          longDescription: longDescription,
           photo: photo,
           price: price,
           quantity: quantity,
@@ -66,8 +75,21 @@ export default class NewProduct extends Component {
               </Form.Group>
 
               <Form.Group>
-                <Form.Label>Enter product description</Form.Label>
-                <Form.Control onChange={this.handleChange} id="description" />
+                <Form.Label>Enter product short description</Form.Label>
+                <Form.Control
+                  onChange={this.handleChange}
+                  id="shortDescription"
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label>Enter product long description</Form.Label>
+                <Form.Control
+                  onChange={this.handleChange}
+                  id="longDescription"
+                  as="textarea"
+                  rows={3}
+                />
               </Form.Group>
 
               <Form.Group>
@@ -84,14 +106,15 @@ export default class NewProduct extends Component {
                 <Form.Label>Enter product quantity</Form.Label>
                 <Form.Control onChange={this.handleChange} id="quantity" />
               </Form.Group>
+              <div className="d-flex justify-content-center">
+                <Button className="mr-3" variant="primary" type="submit">
+                  Submit
+                </Button>
 
-              <Button className="mr-3" variant="primary" type="submit">
-                Submit
-              </Button>
-
-              <Link to="/admin">
-                <Button variant="primary">Go Back</Button>
-              </Link>
+                <Link to="/admin">
+                  <Button variant="primary">Go Back</Button>
+                </Link>
+              </div>
             </Form>
           </div>
         </div>

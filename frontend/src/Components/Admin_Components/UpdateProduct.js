@@ -14,7 +14,8 @@ export default class UpdateProduct extends Component {
       itemFound: false,
       validUpdate: false,
       name: "",
-      description: "",
+      shortDescription: "",
+      longDescription: "",
       photo: "",
       price: "",
       quantity: "",
@@ -53,7 +54,8 @@ export default class UpdateProduct extends Component {
         `https://e-commerce-project-2020.herokuapp.com/inventory/${this.state.itemEntered}`,
         {
           product_name: this.state.name,
-          description: this.state.description,
+          shortDescription: this.state.shortDescription,
+          longDescription: this.state.longDescription,
           photo: this.state.photo,
           price: this.state.price,
           quantity: this.state.quantity,
@@ -108,7 +110,7 @@ export default class UpdateProduct extends Component {
               <div className="text-center">
                 <ul style={{ listStyle: "none" }}>
                   <li>{this.state.item.product_name}</li>
-                  <li>{this.state.item.description}</li>
+                  <li>{this.state.item.shortDescription}</li>
                 </ul>
               </div>
               <Form onSubmit={this.handleUpdateSubmit}>
@@ -118,8 +120,21 @@ export default class UpdateProduct extends Component {
                 </Form.Group>
 
                 <Form.Group>
-                  <Form.Label>Update product description</Form.Label>
-                  <Form.Control onChange={this.handleChange} id="description" />
+                  <Form.Label>Update product short description</Form.Label>
+                  <Form.Control
+                    onChange={this.handleChange}
+                    id="shortDescription"
+                  />
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Label>Update product long description</Form.Label>
+                  <Form.Control
+                    onChange={this.handleChange}
+                    id="longDescription"
+                    as="textarea"
+                    rows={3}
+                  />
                 </Form.Group>
 
                 <Form.Group>
@@ -136,10 +151,11 @@ export default class UpdateProduct extends Component {
                   <Form.Label>Update product quantity</Form.Label>
                   <Form.Control onChange={this.handleChange} id="quantity" />
                 </Form.Group>
-
-                <Button className="mr-3" type="submit" variant="primary">
-                  Submit
-                </Button>
+                <div className="d-flex justify-content-center">
+                  <Button className="mr-3" type="submit" variant="primary">
+                    Submit
+                  </Button>
+                </div>
               </Form>
             </div>
           </div>

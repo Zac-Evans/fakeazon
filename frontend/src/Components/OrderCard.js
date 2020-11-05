@@ -8,9 +8,9 @@ class OrderCard extends Component {
   render() {
     return (
       <Col>
-        <Card className="p-3">
+        <Card className="p-3 mb-2">
           <h2>${this.props.price}</h2>
-          <p>FREE delivery</p>
+          <b>FREE delivery</b>
           {this.props.quantity ? (
             <div>
               <h5>In stock.</h5>

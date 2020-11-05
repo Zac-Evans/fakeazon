@@ -13,37 +13,39 @@ class Product extends React.Component {
       <div>
         <Fade triggerOnce>
           <a href="/">Back to results</a>
-          <Row>
-            <Col>
+          <Row className="text-center">
+            <Col className="col-12 col-md-4 d-flex justify-content-center">
               <Image src={this.props.photo} fluid></Image>
             </Col>
-            <Col>
+            <Col className="col-12 col-md-4">
               <h1>{this.props.product_name} </h1>
+              <h5>${this.props.price}</h5>
               <ProductRating
                 rating={this.props.rating}
                 product_name={this.props.product_name}
                 rating_count={this.props.rating_count}
               />
-              <hr />
-              <h2>${this.props.price}</h2>
+
               <hr />
               <h5>About this item</h5>
               <hr />
               <p>{this.props.longDescription}</p>
             </Col>
-            <OrderCard
-              key={this.props.id}
-              id={this.props.id}
-              product_name={this.props.product_name}
-              shortDescription={this.props.shortDescription}
-              longDescription={this.props.longDescription}
-              photo={this.props.photo}
-              price={this.props.price}
-              quantity={this.props.quantity}
-              rating={this.props.rating}
-              rating_count={this.props.rating_count}
-              rerenderParentCallback={this.props.rerenderParentCallback}
-            />
+            <Col className="col-12 col-md-4">
+              <OrderCard
+                key={this.props.id}
+                id={this.props.id}
+                product_name={this.props.product_name}
+                shortDescription={this.props.shortDescription}
+                longDescription={this.props.longDescription}
+                photo={this.props.photo}
+                price={this.props.price}
+                quantity={this.props.quantity}
+                rating={this.props.rating}
+                rating_count={this.props.rating_count}
+                rerenderParentCallback={this.props.rerenderParentCallback}
+              />
+            </Col>
           </Row>
         </Fade>
       </div>

@@ -11,18 +11,21 @@ class AddToCartButton extends Component {
     };
   }
 
-  showDiv = () => {
-    this.setState.visible = false;
+  componentWillUnmount() {
+    window.clearTimeout(this.timeout);
+  }
+
+  visibleFalse = () => {
+    this.setState({
+      visible: false,
+    });
   };
 
-  addToCart = (product) => {
+  addToCart = () => {
     let addedToCart = () => {
       this.setState({ visible: true });
-      setTimeout(() => {
-        this.setState({
-          visible: false,
-        });
-      }, 3000);
+      this.timeout = setTimeout(this.visibleFalse, 3000);
+
       // this.props.rerenderParentCallback();
     };
     //Check if logged in. If not, add to local storage cart
@@ -75,17 +78,19 @@ class AddToCartButton extends Component {
     if (this.state.visible) style = fadeIn;
     return (
       <div>
-        <Button
-          variant="primary"
-          className="addToCartButton m-1"
-          onClick={this.addToCart}
-        >
-          Add to Cart
-        </Button>
+        <div>
+          <Button
+            variant="primary"
+            className="addToCartButton m-1 btn-lg"
+            onClick={this.addToCart}
+          >
+            Add to Cart
+          </Button>
 
-        <h6 key={this.props.id} className="pt-2 pb-0 mb-0" style={style}>
-          Added to cart.
-        </h6>
+          <h6 key={this.props.id} className="pt-2 pb-0 mb-0" style={style}>
+            Added to cart.
+          </h6>
+        </div>
       </div>
     );
   }

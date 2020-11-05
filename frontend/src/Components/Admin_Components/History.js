@@ -9,7 +9,7 @@ export default class History extends Component {
 
     return (
       <Link to="/order-history/user">
-        <Button className="m-3">Order History</Button>
+        <Button className="m-2">Orders</Button>
       </Link>
     );
   }

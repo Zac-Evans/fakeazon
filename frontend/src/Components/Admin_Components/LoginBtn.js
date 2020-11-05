@@ -7,7 +7,7 @@ export default class Login extends Component {
   render() {
     return (
       <Link to="/register">
-        <Button className="m-3">Login/Register</Button>
+        <Button className="m-2">Login/Register</Button>
       </Link>
     );
   }

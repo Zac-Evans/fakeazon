@@ -67,15 +67,19 @@ export default class Checkout extends Component {
         <Fade>
           <Container fluid>
             <Row>
-              <Col width="20%">
-                <Cart />
+              <Col className="col-12 col-md-5 d-flex justify-content-center">
+                <Cart style={{ float: "none", margin: "auto" }} />
               </Col>
-              <Col>
+              <Col className="col-12 col-md-7 pb-4">
                 <div className="mt-5 mb-5 text-center">
                   <h3>Ready to checkout?</h3>
                 </div>
 
-                <Form onSubmit={this.handleSubmit} className=" w-50 mx-auto">
+                <Form
+                  onSubmit={this.handleSubmit}
+                  className="mx-auto"
+                  style={{ maxWidth: "1200px" }}
+                >
                   <h6 style={formStyle}>
                     Enter your shipping information here.
                   </h6>

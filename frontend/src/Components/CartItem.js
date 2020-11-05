@@ -57,9 +57,9 @@ class CartItem extends Component {
   render() {
     return (
       <Fade triggerOnce>
-        <Row className="align-items-center">
+        <Row className="align-items-center ">
           {/* <Card className="productCard m-2" style={{ border: "none" }}> */}
-          <Col lg="3" md="4" sm="5" xs="12">
+          <Col>
             <a href={`/shop/${this.props.id}`}>
               <Card.Img
                 key={this.props.id}
@@ -75,12 +75,11 @@ class CartItem extends Component {
                 <Card.Title>{this.props.product_name}</Card.Title>
               </a>
 
-              <h5>{this.props.shortDescription}</h5>
               <h5>${this.props.price}</h5>
             </Card.Body>
           </Col>
-          <Col>
-            Quantity: {this.props.quantity}
+          <Col className="text-center">
+            <h6>Quantity: {this.props.quantity}</h6>
             {/* <Dropdown>
               <DropdownButton
                 size="sm"
@@ -96,11 +95,13 @@ class CartItem extends Component {
               </DropdownButton>
             </Dropdown> */}
             <Button
+              style={{ minWidth: "90px" }}
+              className="btn-sm"
               onClick={() => {
                 this.removeFromCart();
               }}
             >
-              X Remove from cart
+              <b>X Remove</b>
             </Button>
             {/* <RemoveFromCart /> */}
           </Col>

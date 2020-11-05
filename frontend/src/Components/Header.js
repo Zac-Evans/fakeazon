@@ -34,48 +34,52 @@ class Header extends Component {
       <div>
         <Navbar className="pb-0 pt-0 " bg="dark" variant="dark" expand="md">
           <Navbar.Brand href="/">
-            <Image className="logo" src={Logo} fluid width="120" height="120" />
+            <Image
+              className="logo"
+              src={Logo}
+              fluid
+              width="120"
+              height="120"
+              style={{ minWidth: "120px" }}
+            />
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="">
-              <Row className="d-flex justify-content-center">
-                <Col className="col-md-9 col-12 d-flex justify-content-center">
-                  <Form inline className="w-100 ">
-                    <FormControl
-                      htmlFor="search"
-                      type="text"
-                      placeholder="Search"
-                      className="w-75"
-                      value={this.props.inputValue}
-                      onChange={this.props.filterOnChange}
-                    />
-                    <Button variant="outline-info">Search</Button>
-                  </Form>{" "}
-                </Col>
-
-                <Col className="d-flex justify-content-start col-md-3 col-12">
-                  {loggedIn && <History />}
-                  {isAdmin && <AdminBtn />}
-                  {loggedIn && <LogOut />}
-                  {!loggedIn && <Login />}
-                  <Link to="/checkout">
-                    <Image
-                      className="logo m-2"
-                      src={CartIcon}
-                      width="60"
-                      height="60"
-                    />
-                  </Link>
-                </Col>
-              </Row>
-              {/* <Row>
+            <Form
+              inline
+              className="w-100 d-flex justify-content-center"
+              style={{ minWidth: "310px" }}
+            >
+              <FormControl
+                htmlFor="search"
+                type="text"
+                placeholder="Search"
+                className="w-75"
+                value={this.props.inputValue}
+                onChange={this.props.filterOnChange}
+              />
+              <Button variant="outline-info">Search</Button>
+            </Form>{" "}
+            <div className="d-flex justify-content-center align-items-center">
+              {loggedIn && <History />}
+              {isAdmin && <AdminBtn />}
+              {loggedIn && <LogOut />}
+              {!loggedIn && <Login />}
+              <Link to="/checkout">
+                <Image
+                  className="logo m-2"
+                  src={CartIcon}
+                  width="60"
+                  height="60"
+                />
+              </Link>
+            </div>
+            {/* <Row>
                   <Col>
                     <CartCounter cart_count={this.props.cart_count} />
                   </Col>
                 </Row> */}
-            </Nav>
           </Navbar.Collapse>
         </Navbar>
       </div>

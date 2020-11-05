@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import Header from "./Header";
 import Detailedhistory from "./Detailedhistory";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Fade } from "react-awesome-reveal";
 
 class CompleteOrderhistory extends Component {
   constructor(props) {
@@ -42,36 +43,41 @@ class CompleteOrderhistory extends Component {
       <div>
         <Header />
         {this.state.order && (
-          <Container>
-            <h2>Order history for user #{user_id}</h2>
-            <Router>
-              <Route exact path={`/order-history/user`}>
-                <Row>
-                  {this.state.order.map((item, index) => (
-                    <OrderHistoryCard
+          <Fade>
+            <Container>
+              <h2>Order history for user #{user_id}</h2>
+              <Router>
+                <Route exact path={`/order-history/user`}>
+                  <Row>
+                    {this.state.order.map((item, index) => (
+                      <OrderHistoryCard
+                        key={item.id}
+                        id={item.order_number}
+                        product_name={item.inventory.product_name}
+                        quantity={item.quantity}
+                        price={item.price}
+                      />
+                    ))}
+                  </Row>
+                </Route>
+
+                {this.state.order.map((item, index) => (
+                  <Route
+                    exact
+                    path={`/order-history/order=${item.order_number}`}
+                  >
+                    <Detailedhistory
                       key={item.id}
                       id={item.order_number}
                       product_name={item.inventory.product_name}
                       quantity={item.quantity}
                       price={item.price}
                     />
-                  ))}
-                </Row>
-              </Route>
-
-              {this.state.order.map((item, index) => (
-                <Route exact path={`/order-history/order=${item.order_number}`}>
-                  <Detailedhistory
-                    key={item.id}
-                    id={item.order_number}
-                    product_name={item.inventory.product_name}
-                    quantity={item.quantity}
-                    price={item.price}
-                  />
-                </Route>
-              ))}
-            </Router>
-          </Container>
+                  </Route>
+                ))}
+              </Router>
+            </Container>
+          </Fade>
         )}
       </div>
     );

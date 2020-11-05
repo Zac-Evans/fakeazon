@@ -6,8 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default class AdminBtn extends Component {
   render() {
     return (
-      <Link className="m-3" to="/admin">
-        <Button>Admin</Button>
+      <Link to="/admin">
+        <Button className="m-2">Admin</Button>
       </Link>
     );
   }
