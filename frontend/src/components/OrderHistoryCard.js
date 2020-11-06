@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
+import Image from "react-bootstrap/Image";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class OrderHistoryCard extends Component {
@@ -12,12 +13,12 @@ class OrderHistoryCard extends Component {
         style={{ width: "18rem" }}
         className="mb-2"
       >
-        <a href = {`/order-history/order=${this.props.id}`}>
+        <a href={`/order-history/order=${this.props.id}`}>
           <Card.Header>Order #{this.props.id}</Card.Header>
-
         </a>
         <Card.Body>
           <Card.Title>{this.props.product_name} </Card.Title>
+          <Image src={this.props.photo} />
           <Card.Text>
             Quantity ordered: {this.props.quantity}
             <br></br>

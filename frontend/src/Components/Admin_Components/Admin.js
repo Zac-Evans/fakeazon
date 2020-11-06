@@ -19,7 +19,6 @@ export default class Admin extends Component {
   render() {
     return (
       <div>
-        <Header />
         <Container className="w-100">
           <h1
             style={{ textDecoration: "underline" }}

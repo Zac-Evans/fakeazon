@@ -1,3 +1,15 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
+
+
+
+
+-Ripe and ready to eat
+-5 to a bunch
+-Great with coconuts
+
+14-ounce container of mixed squash spirals that includes zucchini and yellow squash spirals.
+Ready to cook.
+No preservatives.
+Our Fresh brand products are all about high-quality food that fits every budget, every day.

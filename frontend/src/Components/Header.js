@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import FormControl from "react-bootstrap/FormControl";
@@ -14,7 +11,6 @@ import LogOut from "./Admin_Components/LogOutBtn";
 import Login from "./Admin_Components/LoginBtn";
 import AdminBtn from "./Admin_Components/AdminBtn";
 import CartIcon from "../images/cart-icon.png";
-import CartCounter from "./CartCounter";
 import History from "./Admin_Components/History";
 
 class Header extends Component {

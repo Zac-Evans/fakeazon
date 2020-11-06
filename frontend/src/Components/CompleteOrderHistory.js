@@ -7,7 +7,6 @@ import OrderHistoryCard from "./OrderHistoryCard";
 import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Col from "react-bootstrap/Col";
-import Header from "./Header";
 import Detailedhistory from "./Detailedhistory";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
@@ -41,7 +40,6 @@ class CompleteOrderhistory extends Component {
 
     return (
       <div>
-        <Header />
         {this.state.order && (
           <Fade>
             <Container>

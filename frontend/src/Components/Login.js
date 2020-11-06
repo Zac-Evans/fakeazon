@@ -3,7 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import Header from "./Header";
 
 export default class Login extends Component {
   constructor() {
@@ -71,8 +70,7 @@ export default class Login extends Component {
     } else {
       return (
         <div>
-          <Header />
-          <Form onSubmit={this.handleSubmit} className="mt-5 w-50 mx-auto">
+          <Form onSubmit={this.handleSubmit} className="m-4 w-50 mx-auto">
             <h1 className="text-center">Login</h1>
             <Form.Group>
               <Form.Label>Email address</Form.Label>

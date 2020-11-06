@@ -76,7 +76,6 @@ export default class UpdateProduct extends Component {
     } else {
       return (
         <div>
-          <Header />
           <div className="mx-auto w-50 mt-4">
             <Link style={{ textDecoration: "underline" }} to="/admin">
               Back
@@ -110,7 +109,7 @@ export default class UpdateProduct extends Component {
               <div className="text-center">
                 <ul style={{ listStyle: "none" }}>
                   <li>{this.state.item.product_name}</li>
-                  <li>{this.state.item.shortDescription}</li>
+                  <li>{this.state.item.photo}</li>
                 </ul>
               </div>
               <Form onSubmit={this.handleUpdateSubmit}>

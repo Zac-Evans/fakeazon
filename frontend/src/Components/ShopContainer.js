@@ -5,8 +5,8 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 import Product from "./Product";
-import Header from "./Header";
 import Image from "react-bootstrap/Image";
+import Background from "../images/fruit-background.jpeg";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -74,16 +74,17 @@ class ShopContainer extends Component {
     // });
     return (
       <div>
-        <Header
-        // rerenderParentCallback={this.rerenderParentCallback}
-        // cart_count={this.state.cart_count}
-        />
-        <Image src="https://www.naturesproduce.com/wp-content/uploads/2018/08/citrus-header-2.jpg" />
         {this.state.products && (
-          <Container>
+          <Container className="pl-0 pr-0">
             <Router>
               <Switch>
                 <Route exact path="/">
+                  <Image
+                    fluid
+                    width="1200px"
+                    className="m-0"
+                    src={Background}
+                  />
                   <Row className="d-flex justify-content-center">
                     {this.state.products.map((item, index) => (
                       <ProductCard

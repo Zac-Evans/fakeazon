@@ -23,10 +23,12 @@ class ProductCard extends Component {
 
             <Card.Body className="text-center">
               <a href={`/shop/${this.props.id}`}>
-                <Card.Title>{this.props.product_name}</Card.Title>
+                <Card.Title>
+                  <h3>{this.props.product_name}</h3>
+                </Card.Title>
               </a>
               <Card.Text>{this.props.shortDescription}</Card.Text>
-              <div>${this.props.price}</div>
+              <h4>${this.props.price}</h4>
               <ProductRating
                 id={this.props.id}
                 rating={this.props.rating}

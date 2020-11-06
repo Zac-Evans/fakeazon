@@ -59,8 +59,7 @@ export default class NewProduct extends Component {
     } else {
       return (
         <div>
-          <Header />
-          <div className="mx-auto w-50 mt-4">
+          <div className="mx-auto w-50 m-4">
             <Link style={{ textDecoration: "underline" }} to="/admin">
               Back
             </Link>

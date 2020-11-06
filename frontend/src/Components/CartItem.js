@@ -5,8 +5,6 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import { Fade } from "react-awesome-reveal";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 
 class CartItem extends Component {
@@ -14,21 +12,29 @@ class CartItem extends Component {
     super(props);
     // this.removeFromCart = this.removeFromCart.bind(this);
     this.state = {
-      value: 0,
+      photo: this.props.photo,
+      id: this.props.id,
+      product_name: this.props.product_name,
+      price: this.props.price,
+      quantity: this.props.quantity,
     };
   }
-
+  clearState = () => {
+    this.setState({
+      photo: "",
+      id: "",
+      product_name: "",
+      price: "",
+      quantity: "",
+    });
+  };
   removeFromCart = () => {
-    let addedToCart = () => {
-      this.setState({ value: this.state.value + 1 });
-    };
     //Check if logged in. If not, add to local storage cart
     if (!sessionStorage.getItem("userId")) {
       let cart = JSON.parse(sessionStorage.getItem("cart"));
-      console.log(cart);
       let filteredCart = cart.filter((item) => item !== this.props.id);
       sessionStorage.setItem("cart", JSON.stringify(filteredCart));
-      addedToCart();
+      this.clearState();
       // this.props.rerenderParentCallback();
     }
 
@@ -41,46 +47,48 @@ class CartItem extends Component {
           )}`
         )
         .then((res) => {
-          axios.post(
-            "https://e-commerce-project-2020.herokuapp.com/add-to-cart",
-            {
-              product_id: this.props.id,
-              // quantity:
-              shopping_cart_id: res.data[0].id,
-            }
-          );
+          console.log(this.props.id);
+          axios
+            .delete(
+              `https://e-commerce-project-2020.herokuapp.com/delete-from-cart/${res.data[0].id}/${this.props.id}`
+            )
+            .catch((error) => {
+              console.log("error");
+            });
+          this.clearState();
         });
-      addedToCart();
     }
   };
 
   render() {
     return (
       <Fade triggerOnce>
-        <Row className="align-items-center ">
-          {/* <Card className="productCard m-2" style={{ border: "none" }}> */}
-          <Col>
-            <a href={`/shop/${this.props.id}`}>
-              <Card.Img
-                key={this.props.id}
-                variant="top"
-                src={this.props.photo}
-                className="productImage"
-              />
-            </a>
-          </Col>
-          <Col>
-            <Card.Body className="text-center">
-              <a href={`/shop/${this.props.id}`}>
-                <Card.Title>{this.props.product_name}</Card.Title>
-              </a>
+        {this.state.product_name && (
+          <div>
+            <Row className="align-items-center ">
+              {/* <Card className="productCard m-2" style={{ border: "none" }}> */}
+              <Col>
+                <a href={`/shop/${this.state.id}`}>
+                  <Card.Img
+                    key={this.state.id}
+                    variant="top"
+                    src={this.state.photo}
+                    className="productImage"
+                  />
+                </a>
+              </Col>
+              <Col>
+                <Card.Body className="text-center">
+                  <a href={`/shop/${this.state.id}`}>
+                    <Card.Title>{this.state.product_name}</Card.Title>
+                  </a>
 
-              <h5>${this.props.price}</h5>
-            </Card.Body>
-          </Col>
-          <Col className="text-center">
-            <h6>Quantity: {this.props.quantity}</h6>
-            {/* <Dropdown>
+                  <h5>${this.state.price}</h5>
+                </Card.Body>
+              </Col>
+              <Col className="text-center">
+                <h6>Quantity: {this.state.quantity}</h6>
+                {/* <Dropdown>
               <DropdownButton
                 size="sm"
                 menuAlign="right"
@@ -94,22 +102,24 @@ class CartItem extends Component {
                 <Dropdown.Item eventKey="4">4</Dropdown.Item>
               </DropdownButton>
             </Dropdown> */}
-            <Button
-              style={{ minWidth: "90px" }}
-              className="btn-sm"
-              onClick={() => {
-                this.removeFromCart();
-              }}
-            >
-              <b>X Remove</b>
-            </Button>
-            {/* <RemoveFromCart /> */}
-          </Col>
+                <Button
+                  style={{ minWidth: "90px" }}
+                  className="btn-sm"
+                  onClick={() => {
+                    this.removeFromCart();
+                  }}
+                >
+                  <b>X Remove</b>
+                </Button>
+                {/* <RemoveFromCart /> */}
+              </Col>
 
-          <hr />
-          {/* </Card> */}
-        </Row>
-        <hr />
+              <hr />
+              {/* </Card> */}
+            </Row>
+            <hr />
+          </div>
+        )}
       </Fade>
     );
   }

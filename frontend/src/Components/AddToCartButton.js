@@ -37,8 +37,8 @@ class AddToCartButton extends Component {
         let cart = JSON.parse(sessionStorage.getItem("cart"));
         cart.push(this.props.id);
         sessionStorage.setItem("cart", JSON.stringify(cart));
-        addedToCart();
       }
+      addedToCart();
     }
     //If logged in, store cart in database
     else {
